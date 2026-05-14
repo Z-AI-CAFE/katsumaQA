@@ -9,6 +9,8 @@
 const fs   = require('fs');
 const path = require('path');
 
+const SITE_URL = 'https://benevolent-blini-453251.netlify.app';
+
 // ── data.js を読み込んで QA_DATA / ALL_TAGS を取得 ──────────────────
 const dataContent = fs.readFileSync(path.join(__dirname, 'data.js'), 'utf8');
 // eslint-disable-next-line no-new-func
@@ -89,6 +91,26 @@ function generateJsonLd(data) {
   return '<script type="application/ld+json">\n' + JSON.stringify(schema, null, 2) + '\n<\/script>';
 }
 
+// ── sitemap.xml 生成 ─────────────────────────────────────────────────
+function generateSitemap(today) {
+  return '<?xml version="1.0" encoding="UTF-8"?>\n'
+    + '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    + '  <url>\n'
+    + '    <loc>' + SITE_URL + '/</loc>\n'
+    + '    <lastmod>' + today + '</lastmod>\n'
+    + '    <changefreq>monthly</changefreq>\n'
+    + '    <priority>1.0</priority>\n'
+    + '  </url>\n'
+    + '</urlset>\n';
+}
+
+// ── robots.txt 生成 ───────────────────────────────────────────────────
+function generateRobots() {
+  return 'User-agent: *\n'
+    + 'Allow: /\n'
+    + 'Sitemap: ' + SITE_URL + '/sitemap.xml\n';
+}
+
 // ── index.html を読み込んでプレースホルダーを置換 ────────────────────
 var html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
 
@@ -100,9 +122,14 @@ html = html.replace(
 );
 
 // ── dist/ に出力 ──────────────────────────────────────────────────────
+var today   = new Date().toISOString().slice(0, 10);
 var distDir = path.join(__dirname, 'dist');
+
 fs.mkdirSync(distDir, { recursive: true });
-fs.writeFileSync(path.join(distDir, 'index.html'), html, 'utf8');
-fs.copyFileSync(path.join(__dirname, 'data.js'), path.join(distDir, 'data.js'));
+fs.writeFileSync(path.join(distDir, 'index.html'),  html,                   'utf8');
+fs.writeFileSync(path.join(distDir, 'sitemap.xml'), generateSitemap(today), 'utf8');
+fs.writeFileSync(path.join(distDir, 'robots.txt'),  generateRobots(),       'utf8');
+fs.copyFileSync( path.join(__dirname, 'data.js'),   path.join(distDir, 'data.js'));
 
 console.log('BUILD COMPLETE: dist/index.html (' + QA_DATA.length + ' Q&A items)');
+console.log('sitemap.xml lastmod: ' + today);
