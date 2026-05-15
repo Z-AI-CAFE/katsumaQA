@@ -5,7 +5,7 @@ on:
     branches:
       - main
   workflow_dispatch:
-
+h
 permissions:
   contents: read
   pages: write
@@ -29,7 +29,7 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Build
         run: node build.js
