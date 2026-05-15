@@ -3,13 +3,13 @@
  *
  * 月次更新手順:
  *   data.js を更新して git push するだけ。
- *   Netlify が自動的にこのスクリプトを実行してデプロイします。
+ *   GitHub Actions が自動的にこのスクリプトを実行してデプロイします。
  */
 
 const fs   = require('fs');
 const path = require('path');
 
-const SITE_URL = 'https://benevolent-blini-453251.netlify.app';
+const SITE_URL = 'https://z-ai-cafe.github.io/katsumaQA';
 const CH_NAME  = '勝間和代が徹底的にマニアックな話をするYouTube';
 const CH_URL   = 'https://www.youtube.com/channel/UCWoiNwdr7EEjgs2waxe_QpA';
 
