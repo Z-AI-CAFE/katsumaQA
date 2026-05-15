@@ -332,7 +332,8 @@ main {
   margin-top: 10px;
   border-radius: 8px;
   overflow: hidden;
-  aspect-ratio: 16 / 9;
+  height: 160px;
+  scroll-margin-top: 160px; /* スティッキーバー分のオフセット */
 }
 .yt-embed-wrap iframe {
   width: 100%;
@@ -617,6 +618,14 @@ function toggleEmbed(btn, videoId, seconds, timestamp) {
       + ' allowfullscreen loading="lazy"></iframe>';
     wrap.style.display = 'block';
     btn.textContent = '✕ 閉じる';
+    // 展開後、スティッキーバーに隠れないようスクロール調整
+    setTimeout(function() {
+      const rect = wrap.getBoundingClientRect();
+      const stickyH = 155; // header(~73px) + filter-bar(~82px)
+      if (rect.top < stickyH) {
+        window.scrollBy({ top: rect.top - stickyH - 8, behavior: 'smooth' });
+      }
+    }, 50);
   }
 }
 
