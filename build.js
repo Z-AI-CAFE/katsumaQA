@@ -9,7 +9,9 @@
 const fs   = require('fs');
 const path = require('path');
 
-const SITE_URL = 'https://benevolent-blini-453251.netlify.app';
+const SITE_URL    = 'https://benevolent-blini-453251.netlify.app';
+const CH_NAME     = '勝間和代が徹底的にマニアックな話をするYouTube';
+const CH_URL      = 'https://www.youtube.com/channel/UCWoiNwdr7EEjgs2waxe_QpA';
 
 // ── data.js を読み込んで QA_DATA / ALL_TAGS を取得 ──────────────────
 const dataContent = fs.readFileSync(path.join(__dirname, 'data.js'), 'utf8');
@@ -33,15 +35,14 @@ function escHtml(str) {
     .replace(/"/g, '&quot;');
 }
 
-function ytUrl(videoId, seconds) {
-  return 'https://www.youtube.com/watch?v=' + encodeURIComponent(videoId) + '&t=' + seconds + 's';
+function ytEmbedUrl(videoId, seconds) {
+  return 'https://www.youtube.com/embed/' + encodeURIComponent(videoId) + '?start=' + seconds + '&rel=0';
 }
 
 // ── 静的Q&AカードHTML生成 ─────────────────────────────────────────────
 function generateStaticCards(data) {
   var html = '';
   var currentMonth = null;
-  var ytIcon = '<svg class="yt-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1C4.5 20.4 12 20.4 12 20.4s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>';
 
   data.forEach(function(d) {
     var monthKey = d.year + '_' + String(d.month).padStart(2, '0');
@@ -65,9 +66,13 @@ function generateStaticCards(data) {
         + '<div class="a-text">' + escHtml(d.answer) + '</div>'
       + '</div>'
       + '<div class="card-footer">'
-        + '<a class="yt-link" href="' + ytUrl(d.videoId, d.seconds) + '" target="_blank" rel="noopener">'
-          + ytIcon + escHtml(d.timestamp) + ' から見る'
-        + '</a>'
+        + '<div class="yt-source">出典: <a href="' + CH_URL + '" target="_blank" rel="noopener">' + CH_NAME + '</a></div>'
+        + '<div class="yt-actions">'
+          + '<button class="yt-embed-btn" onclick="toggleEmbed(this,\'' + escHtml(d.videoId) + '\',' + d.seconds + ',\'' + escHtml(d.timestamp) + '\')">'
+          + '&#9654; ' + escHtml(d.timestamp) + ' から再生'
+          + '</button>'
+        + '</div>'
+        + '<div class="yt-embed-wrap" style="display:none;"></div>'
       + '</div>'
     + '</div>';
   });

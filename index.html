@@ -291,31 +291,54 @@ main {
 }
 .card-footer {
   margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.yt-source {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.yt-source a {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.yt-source a:hover { color: var(--text); }
+.yt-actions {
   display: flex;
-  align-items: center;
   justify-content: flex-end;
 }
-.yt-link {
+.yt-embed-btn {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   font-size: 12.5px;
   color: var(--youtube);
-  text-decoration: none;
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 6px;
   border: 1.5px solid transparent;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
   transition: all 0.15s;
 }
-.yt-link:hover {
+.yt-embed-btn:hover {
   background: #fff1f1;
   border-color: #fca5a5;
 }
-.yt-icon {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
+.yt-embed-wrap {
+  margin-top: 10px;
+  border-radius: 8px;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+}
+.yt-embed-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
 }
 /* ── Empty state ── */
 .empty-state {
@@ -482,7 +505,8 @@ footer {
 </main>
 
 <footer>
-  データ出典: 勝間塾 公開質問ライブ（YouTube）&nbsp;／&nbsp;最終更新: 2026年5月
+  <p>データ出典: <a href="https://www.youtube.com/channel/UCWoiNwdr7EEjgs2waxe_QpA" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">勝間和代が徹底的にマニアックな話をするYouTube</a>&nbsp;／&nbsp;最終更新: 2026年5月</p>
+  <p style="margin-top:6px;">このサイトは勝間塾の公開質問ライブのファンアーカイブです。動画・回答の著作権は勝間和代氏および勝間塾に帰属します。</p>
 </footer>
 
 <script>
@@ -578,9 +602,22 @@ function getFiltered() {
   return result;
 }
 
-// ── YouTube URL ────────────────────────────────────────
-function ytUrl(videoId, seconds) {
-  return `https://www.youtube.com/watch?v=${videoId}&t=${seconds}s`;
+// ── YouTube 埋め込みトグル ──────────────────────────────
+function toggleEmbed(btn, videoId, seconds, timestamp) {
+  const wrap = btn.closest('.card-footer').querySelector('.yt-embed-wrap');
+  const isOpen = wrap.style.display !== 'none';
+  if (isOpen) {
+    wrap.style.display = 'none';
+    wrap.innerHTML = '';
+    btn.textContent = '▶ ' + timestamp + ' から再生';
+  } else {
+    wrap.innerHTML = '<iframe src="https://www.youtube.com/embed/'
+      + encodeURIComponent(videoId) + '?start=' + seconds + '&rel=0"'
+      + ' allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"'
+      + ' allowfullscreen loading="lazy"></iframe>';
+    wrap.style.display = 'block';
+    btn.textContent = '✕ 閉じる';
+  }
 }
 
 // ── Escape HTML ────────────────────────────────────────
@@ -648,12 +685,11 @@ function renderCards(data) {
           <div class="a-text">${aHtml}</div>
         </div>
         <div class="card-footer">
-          <a class="yt-link" href="${ytUrl(d.videoId, d.seconds)}" target="_blank" rel="noopener">
-            <svg class="yt-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1C4.5 20.4 12 20.4 12 20.4s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/>
-            </svg>
-            ${escHtml(d.timestamp)} から見る
-          </a>
+          <div class="yt-source">出典: <a href="https://www.youtube.com/channel/UCWoiNwdr7EEjgs2waxe_QpA" target="_blank" rel="noopener">勝間和代が徹底的にマニアックな話をするYouTube</a></div>
+          <div class="yt-actions">
+            <button class="yt-embed-btn" onclick="toggleEmbed(this,'${d.videoId}',${d.seconds},'${escHtml(d.timestamp)}')">▶ ${escHtml(d.timestamp)} から再生</button>
+          </div>
+          <div class="yt-embed-wrap" style="display:none;"></div>
         </div>
       `;
       list.appendChild(card);
