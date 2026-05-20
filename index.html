@@ -423,6 +423,41 @@ main {
   background: var(--accent-light);
 }
 
+/* ── Subcategory row ── */
+.subcategory-row {
+  margin-top: -4px;
+  padding-left: 8px;
+  border-left: 3px solid var(--accent-light);
+  margin-left: 4px;
+}
+.subcategory-label {
+  color: var(--accent) !important;
+  font-size: 10px !important;
+}
+.sub-btn {
+  display: inline-block;
+  padding: 3px 11px;
+  border-radius: 20px;
+  border: 1.5px solid var(--accent-light);
+  background: #fff;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+.sub-btn:hover {
+  background: var(--accent-light);
+  border-color: var(--accent);
+}
+.sub-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
 /* ── Keyword highlight ── */
 mark {
   background: #fef08a;
@@ -489,6 +524,11 @@ footer {
       <span class="filter-label">対象者</span>
       <div id="persona-filters"></div>
     </div>
+    <!-- Subcategory filter (対象者選択時のみ表示) -->
+    <div class="filter-row subcategory-row" id="subcategory-row" style="display:none;">
+      <span class="filter-label subcategory-label">└ 悩み</span>
+      <div id="subcategory-filters"></div>
+    </div>
   </div>
 </div>
 
@@ -511,34 +551,76 @@ footer {
 // ── State ──────────────────────────────────────────────
 let activeTag     = null;
 let activeMonth   = null;
-let activePersona = null;
-let searchKw      = '';
-let sortOrder     = 'new'; // 'new' | 'old'
+let activePersona     = null;
+let activeSubcategory = null;
+let searchKw          = '';
+let sortOrder         = 'new'; // 'new' | 'old'
 
 // ── Persona definitions (キーワード自動分類) ───────────
+// 将来のサブカテゴリ追加方法:
+//   対象のペルソナの subcategories 配列に
+//   { id: 'ユニークID', label: '表示名', keywords: ['キーワード1', ...] }
+//   を追加するだけでUIに自動反映されます。
 const PERSONAS = [
   { id: 'freelance', label: '個人事業主・フリーランス',
     keywords: ['副業','フリーランス','フリー','個人事業','開業','起業','集客','案件','受注',
                '自営','独立','コンサル','業務委託','単価','値付け','法人化','クライアント',
-               '事業者','フリーター'] },
+               '事業者','フリーター'],
+    subcategories: [
+      { id: 'freelance_kyakku', label: '集客の悩み',
+        keywords: ['集客','来客','お客','顧客','リピーター','常連','口コミ','紹介',
+                   'SNS発信','フォロワー','宣伝','広告','マーケティング','ブランディング',
+                   'ニッチ','差別化','認知','ファン'] },
+      { id: 'freelance_kakaku', label: '価格設定',
+        keywords: ['価格','単価','値付け','値段','料金','費用','報酬','相場',
+                   'プライシング','値上げ','値下げ','割引','安売り','高単価',
+                   '適正価格','見積もり','請求'] },
+      // ↓ ここに次のサブカテゴリを追加してください
+    ]
+  },
   { id: 'employee', label: '会社員',
     keywords: ['転職','会社員','正社員','昇進','残業','上司','職場','給料','雇用','退職',
                '就職','採用','同僚','異動','昇給','コンプライアンス','中途入社','勤務先',
-               '管理職','部下','部署','サラリーマン'] },
+               '管理職','部下','部署','サラリーマン'],
+    subcategories: [
+      // ↓ ここにサブカテゴリを追加してください
+    ]
+  },
   { id: 'parent', label: '主婦・育児中',
     keywords: ['主婦','育児','子育て','産休','育休','子ども','子供','息子','娘','夫',
                '専業','家事','保育','幼稚園','小学生','中学生','高校生','受験','ママ',
-               'パパ','赤ちゃん','乳幼児'] },
+               'パパ','赤ちゃん','乳幼児'],
+    subcategories: [
+      // ↓ ここにサブカテゴリを追加してください
+    ]
+  },
   { id: 'investor', label: '投資・資産形成',
     keywords: ['投資','資産運用','株','ETF','積立','ポートフォリオ','オルカン','配当',
                '利回り','NISA','iDeCo','資産形成','老後資金','年金','ドルコスト',
-               'リバランス','金融資産','証券','インデックス'] },
+               'リバランス','金融資産','証券','インデックス'],
+    subcategories: [
+      { id: 'investor_60plus', label: '60歳以上の資産形成',
+        keywords: ['定年','リタイア','老後','60歳','65歳','70歳','シニア','退職金',
+                   'セカンドライフ','引退','リタイアメント','60代','70代','熟年'] },
+      // ↓ ここに次のサブカテゴリを追加してください
+    ]
+  },
 ];
 
 // Q&Aがどのペルソナに該当するかを返す
 function getPersonas(d) {
   const text = d.question + ' ' + d.answer + ' ' + (d.name || '');
   return PERSONAS.filter(p => p.keywords.some(k => text.includes(k))).map(p => p.id);
+}
+
+// Q&Aが指定ペルソナの指定サブカテゴリに該当するか判定
+function matchesSubcategory(d, personaId, subcategoryId) {
+  const persona = PERSONAS.find(p => p.id === personaId);
+  if (!persona) return false;
+  const sub = (persona.subcategories || []).find(s => s.id === subcategoryId);
+  if (!sub) return false;
+  const text = d.question + ' ' + d.answer;
+  return sub.keywords.some(k => text.includes(k));
 }
 
 // ── Build month list from data ──────────────────────────
@@ -650,15 +732,49 @@ function renderFilters() {
   const allPersonaBtn = document.createElement('button');
   allPersonaBtn.className = 'tag-btn' + (activePersona === null ? ' active' : '');
   allPersonaBtn.textContent = 'すべて';
-  allPersonaBtn.onclick = () => { activePersona = null; renderAll(); };
+  allPersonaBtn.onclick = () => { activePersona = null; activeSubcategory = null; renderAll(); };
   personaContainer.appendChild(allPersonaBtn);
   PERSONAS.forEach(p => {
     const btn = document.createElement('button');
     btn.className = 'tag-btn' + (activePersona === p.id ? ' active' : '');
     btn.textContent = p.label;
-    btn.onclick = () => { activePersona = p.id; renderAll(); };
+    btn.onclick = () => {
+      if (activePersona !== p.id) activeSubcategory = null; // ペルソナ変更時はサブカテゴリをリセット
+      activePersona = p.id;
+      renderAll();
+    };
     personaContainer.appendChild(btn);
   });
+
+  // ── Subcategory buttons ──
+  const subcategoryRow = document.getElementById('subcategory-row');
+  const subcategoryContainer = document.getElementById('subcategory-filters');
+  const currentPersona = PERSONAS.find(p => p.id === activePersona);
+  const subs = (currentPersona && currentPersona.subcategories) ? currentPersona.subcategories : [];
+
+  if (activePersona !== null && subs.length > 0) {
+    subcategoryRow.style.display = '';
+    subcategoryContainer.innerHTML = '';
+
+    // 「すべて」ボタン
+    const allSubBtn = document.createElement('button');
+    allSubBtn.className = 'sub-btn' + (activeSubcategory === null ? ' active' : '');
+    allSubBtn.textContent = 'すべて';
+    allSubBtn.onclick = () => { activeSubcategory = null; renderAll(); };
+    subcategoryContainer.appendChild(allSubBtn);
+
+    // 各サブカテゴリ
+    subs.forEach(s => {
+      const btn = document.createElement('button');
+      btn.className = 'sub-btn' + (activeSubcategory === s.id ? ' active' : '');
+      btn.textContent = s.label;
+      btn.onclick = () => { activeSubcategory = s.id; renderAll(); };
+      subcategoryContainer.appendChild(btn);
+    });
+  } else {
+    subcategoryRow.style.display = 'none';
+    activeSubcategory = null; // サブカテゴリが存在しないペルソナに切り替えた場合はリセット
+  }
 }
 
 // ── Filter & sort data ─────────────────────────────────
@@ -669,9 +785,10 @@ function getFiltered() {
     const monthOk    = activeMonth   === null || monthKey === activeMonth;
     const tagOk      = activeTag     === null || d.tag    === activeTag;
     const personaOk  = activePersona === null || getPersonas(d).includes(activePersona);
+    const subOk      = activeSubcategory === null || matchesSubcategory(d, activePersona, activeSubcategory);
     const kwOk       = !kwLower || [d.question, d.answer, d.name, d.tag, d.monthLabel]
                          .some(s => s.toLowerCase().includes(kwLower));
-    return monthOk && tagOk && personaOk && kwOk;
+    return monthOk && tagOk && personaOk && subOk && kwOk;
   });
   if (sortOrder === 'old') result = result.slice().reverse();
   return result;
@@ -762,7 +879,7 @@ function renderCards(data) {
 function renderStats(data) {
   const el    = document.getElementById('stats-count');
   const total = QA_DATA.length;
-  const hasFilter = activeTag !== null || activeMonth !== null || activePersona !== null || searchKw;
+  const hasFilter = activeTag !== null || activeMonth !== null || activePersona !== null || activeSubcategory !== null || searchKw;
   if (!hasFilter) {
     el.innerHTML = `<strong>${total}</strong> 件`;
   } else {
@@ -771,7 +888,7 @@ function renderStats(data) {
     el.innerHTML = `<strong>${data.length}</strong> 件表示中${hint}（全 ${total} 件）`;
   }
   const clearBtn = document.getElementById('clear-btn');
-  if (activeTag !== null || activeMonth !== null || activePersona !== null) {
+  if (activeTag !== null || activeMonth !== null || activePersona !== null || activeSubcategory !== null) {
     clearBtn.classList.add('visible');
   } else {
     clearBtn.classList.remove('visible');
@@ -780,9 +897,10 @@ function renderStats(data) {
 
 // ── Clear all filters ──────────────────────────────────
 function clearFilters() {
-  activeTag     = null;
-  activeMonth   = null;
-  activePersona = null;
+  activeTag         = null;
+  activeMonth       = null;
+  activePersona     = null;
+  activeSubcategory = null;
   renderAll();
 }
 
