@@ -10,961 +10,1038 @@
 /* ── Reset & Base ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
-  --bg: #f5f5f0;
-  --surface: #ffffff;
-  --surface2: #f9f9f6;
-  --border: #e2e2dc;
-  --text: #1a1a1a;
-  --text-muted: #6b6b6b;
-  --accent: #2563eb;
-  --accent-light: #dbeafe;
-  --tag-bg: #f0f0eb;
-  --tag-active-bg: #2563eb;
-  --tag-active-text: #ffffff;
-  --youtube: #dc2626;
-  --radius: 10px;
-  --shadow: 0 1px 4px rgba(0,0,0,0.07), 0 2px 8px rgba(0,0,0,0.04);
+--bg: #f5f5f0;
+--surface: #ffffff;
+--surface2: #f9f9f6;
+--border: #e2e2dc;
+--text: #1a1a1a;
+--text-muted: #6b6b6b;
+--accent: #2563eb;
+--accent-light: #dbeafe;
+--tag-bg: #f0f0eb;
+--tag-active-bg: #2563eb;
+--tag-active-text: #ffffff;
+--youtube: #dc2626;
+--radius: 10px;
+--shadow: 0 1px 4px rgba(0,0,0,0.07), 0 2px 8px rgba(0,0,0,0.04);
 }
 body {
-  font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP",
-               "Yu Gothic", "Meiryo", sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.7;
-  font-size: 15px;
+font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP",
+"Yu Gothic", "Meiryo", sans-serif;
+background: var(--bg);
+color: var(--text);
+line-height: 1.7;
+font-size: 15px;
 }
 
 /* ── Header ── */
 header {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 20px 24px 16px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+background: var(--surface);
+border-bottom: 1px solid var(--border);
+padding: 20px 24px 16px;
+position: sticky;
+top: 0;
+z-index: 100;
+box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 .header-inner {
-  max-width: 960px;
-  margin: 0 auto;
+max-width: 960px;
+margin: 0 auto;
 }
 .site-title {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -0.01em;
+font-size: 17px;
+font-weight: 700;
+color: var(--text);
+letter-spacing: -0.01em;
 }
 .site-subtitle {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 2px;
+font-size: 12px;
+color: var(--text-muted);
+margin-top: 2px;
 }
 
 /* ── Filters ── */
 .filter-bar {
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 12px 24px;
-  position: sticky;
-  top: 73px;
-  z-index: 99;
+background: var(--surface);
+border-bottom: 1px solid var(--border);
+padding: 10px 24px;
+position: sticky;
+top: 73px;
+z-index: 99;
 }
 .filter-inner {
-  max-width: 960px;
-  margin: 0 auto;
+max-width: 960px;
+margin: 0 auto;
 }
 .filter-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
+display: flex;
+align-items: center;
+gap: 10px;
+flex-wrap: wrap;
+margin-bottom: 6px;
 }
 .filter-row:last-child { margin-bottom: 0; }
 .filter-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-  min-width: 36px;
+font-size: 11px;
+font-weight: 600;
+color: var(--text-muted);
+text-transform: uppercase;
+letter-spacing: 0.05em;
+white-space: nowrap;
+min-width: 36px;
 }
 .tag-btn {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  border: 1.5px solid var(--border);
-  background: var(--tag-bg);
-  color: var(--text);
-  font-size: 12.5px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
-  font-family: inherit;
+display: inline-block;
+padding: 4px 12px;
+border-radius: 20px;
+border: 1.5px solid var(--border);
+background: var(--tag-bg);
+color: var(--text);
+font-size: 12.5px;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.15s;
+white-space: nowrap;
+font-family: inherit;
 }
 .tag-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-light);
+border-color: var(--accent);
+color: var(--accent);
+background: var(--accent-light);
 }
 .tag-btn.active {
-  background: var(--tag-active-bg);
-  color: var(--tag-active-text);
-  border-color: var(--tag-active-bg);
+background: var(--tag-active-bg);
+color: var(--tag-active-text);
+border-color: var(--tag-active-bg);
 }
 
 /* ── Month "すべて" button ── */
 .month-btn {
-  display: inline-block;
-  padding: 4px 14px;
-  border-radius: 20px;
-  border: 1.5px solid var(--border);
-  background: var(--tag-bg);
-  color: var(--text);
-  font-size: 12.5px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
-  font-family: inherit;
+display: inline-block;
+padding: 4px 14px;
+border-radius: 20px;
+border: 1.5px solid var(--border);
+background: var(--tag-bg);
+color: var(--text);
+font-size: 12.5px;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.15s;
+white-space: nowrap;
+font-family: inherit;
 }
 .month-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-light);
+border-color: var(--accent);
+color: var(--accent);
+background: var(--accent-light);
 }
 .month-btn.active {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
+background: var(--accent);
+color: #fff;
+border-color: var(--accent);
 }
 
 /* ── Year select dropdowns ── */
 .year-select {
-  display: inline-block;
-  padding: 4px 28px 4px 12px;
-  border-radius: 20px;
-  border: 1.5px solid var(--border);
-  background-color: var(--tag-bg);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6b6b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 8px center;
-  color: var(--text);
-  font-size: 12.5px;
-  font-weight: 500;
-  cursor: pointer;
-  font-family: inherit;
-  appearance: none;
-  -webkit-appearance: none;
-  transition: all 0.15s;
-  outline: none;
+display: inline-block;
+padding: 4px 28px 4px 12px;
+border-radius: 20px;
+border: 1.5px solid var(--border);
+background-color: var(--tag-bg);
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6b6b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+background-repeat: no-repeat;
+background-position: right 8px center;
+color: var(--text);
+font-size: 12.5px;
+font-weight: 500;
+cursor: pointer;
+font-family: inherit;
+appearance: none;
+-webkit-appearance: none;
+transition: all 0.15s;
+outline: none;
 }
 .year-select:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background-color: var(--accent-light);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+border-color: var(--accent);
+color: var(--accent);
+background-color: var(--accent-light);
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
 }
 .year-select:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+border-color: var(--accent);
+box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
 }
 .year-select.active {
-  background-color: var(--accent-light);
-  border-color: var(--accent);
-  color: var(--accent);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+background-color: var(--accent-light);
+border-color: var(--accent);
+color: var(--accent);
+background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
 }
 
 /* ── Main content ── */
 main {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 20px 16px 60px;
+max-width: 960px;
+margin: 0 auto;
+padding: 20px 16px 60px;
 }
 
 /* ── Stats bar ── */
 .stats-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  padding: 0 2px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-bottom: 16px;
+padding: 0 2px;
 }
 .stats-count {
-  font-size: 13px;
-  color: var(--text-muted);
+font-size: 13px;
+color: var(--text-muted);
 }
 .stats-count strong {
-  color: var(--text);
-  font-weight: 600;
+color: var(--text);
+font-weight: 600;
 }
 .clear-btn {
-  font-size: 12px;
-  color: var(--accent);
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  padding: 2px 4px;
-  border-radius: 4px;
+font-size: 12px;
+color: var(--accent);
+background: none;
+border: none;
+cursor: pointer;
+font-family: inherit;
+padding: 2px 4px;
+border-radius: 4px;
 }
 .clear-btn:hover { text-decoration: underline; }
 .clear-btn:not(.visible) { visibility: hidden; }
 
 /* ── Cards ── */
 .qa-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+display: flex;
+flex-direction: column;
+gap: 12px;
 }
 .qa-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px 20px 16px;
-  box-shadow: var(--shadow);
-  transition: box-shadow 0.15s, border-color 0.15s;
+background: var(--surface);
+border: 1px solid var(--border);
+border-radius: var(--radius);
+padding: 18px 20px 16px;
+box-shadow: var(--shadow);
+transition: box-shadow 0.15s, border-color 0.15s;
 }
 .qa-card:hover {
-  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-  border-color: #d0d0cc;
+box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+border-color: #d0d0cc;
 }
 .card-meta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
-  flex-wrap: wrap;
+display: flex;
+align-items: center;
+gap: 8px;
+margin-bottom: 10px;
+flex-wrap: wrap;
 }
 .q-num {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text-muted);
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  padding: 1px 7px;
-  letter-spacing: 0.02em;
+font-size: 12px;
+font-weight: 700;
+color: var(--text-muted);
+background: var(--surface2);
+border: 1px solid var(--border);
+border-radius: 5px;
+padding: 1px 7px;
+letter-spacing: 0.02em;
 }
 .month-badge {
-  font-size: 11.5px;
-  color: var(--text-muted);
-  font-weight: 500;
+font-size: 11.5px;
+color: var(--text-muted);
+font-weight: 500;
 }
 .name-badge {
-  font-size: 12px;
-  color: var(--text-muted);
+font-size: 12px;
+color: var(--text-muted);
 }
 .tag-badge {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 9px;
-  border-radius: 12px;
-  background: var(--accent-light);
-  color: var(--accent);
-  letter-spacing: 0.02em;
-  margin-left: auto;
+display: inline-block;
+font-size: 11px;
+font-weight: 600;
+padding: 2px 9px;
+border-radius: 12px;
+background: var(--accent-light);
+color: var(--accent);
+letter-spacing: 0.02em;
+margin-left: auto;
 }
 .q-section {
-  margin-bottom: 8px;
+margin-bottom: 8px;
 }
 .q-label {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 3px;
+font-size: 11px;
+font-weight: 700;
+color: var(--text-muted);
+text-transform: uppercase;
+letter-spacing: 0.06em;
+margin-bottom: 3px;
 }
 .q-text {
-  font-size: 14px;
-  line-height: 1.65;
-  color: var(--text);
+font-size: 14px;
+line-height: 1.65;
+color: var(--text);
 }
 .a-section {
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid var(--border);
+margin-top: 10px;
+padding-top: 10px;
+border-top: 1px solid var(--border);
 }
 .a-label {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 3px;
+font-size: 11px;
+font-weight: 700;
+color: var(--text-muted);
+text-transform: uppercase;
+letter-spacing: 0.06em;
+margin-bottom: 3px;
 }
 .a-text {
-  font-size: 13.5px;
-  line-height: 1.65;
-  color: #3a3a3a;
+font-size: 13.5px;
+line-height: 1.65;
+color: #3a3a3a;
 }
 .card-footer {
-  margin-top: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+margin-top: 12px;
+display: flex;
+align-items: center;
+justify-content: flex-end;
 }
 .yt-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12.5px;
-  color: var(--youtube);
-  text-decoration: none;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 6px;
-  border: 1.5px solid transparent;
-  transition: all 0.15s;
+display: inline-flex;
+align-items: center;
+gap: 5px;
+font-size: 12.5px;
+color: var(--youtube);
+text-decoration: none;
+font-weight: 600;
+padding: 4px 10px;
+border-radius: 6px;
+border: 1.5px solid transparent;
+transition: all 0.15s;
 }
 .yt-link:hover {
-  background: #fff1f1;
-  border-color: #fca5a5;
+background: #fff1f1;
+border-color: #fca5a5;
 }
 .yt-icon {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
+width: 16px;
+height: 16px;
+flex-shrink: 0;
 }
 
 /* ── Empty state ── */
 .empty-state {
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--text-muted);
+text-align: center;
+padding: 60px 20px;
+color: var(--text-muted);
 }
 .empty-state p { font-size: 15px; }
 
 /* ── Month group header ── */
 .month-group-header {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-muted);
-  letter-spacing: 0.04em;
-  padding: 4px 2px 8px;
-  margin-top: 8px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 2px;
+font-size: 13px;
+font-weight: 700;
+color: var(--text-muted);
+letter-spacing: 0.04em;
+padding: 4px 2px 8px;
+margin-top: 8px;
+border-bottom: 1px solid var(--border);
+margin-bottom: 2px;
 }
 
 /* ── Search box ── */
 .search-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 8px;
+display: flex;
+align-items: center;
+gap: 10px;
+margin-bottom: 8px;
 }
 .search-input {
-  flex: 1;
-  max-width: 360px;
-  padding: 5px 12px 5px 32px;
-  border: 1.5px solid var(--border);
-  border-radius: 20px;
-  font-size: 13px;
-  font-family: inherit;
-  background: var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236b6b6b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E") no-repeat 10px center;
-  color: var(--text);
-  transition: border-color 0.15s, box-shadow 0.15s;
-  outline: none;
+flex: 1;
+max-width: 360px;
+padding: 5px 12px 5px 32px;
+border: 1.5px solid var(--border);
+border-radius: 20px;
+font-size: 13px;
+font-family: inherit;
+background: var(--bg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%236b6b6b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E") no-repeat 10px center;
+color: var(--text);
+transition: border-color 0.15s, box-shadow 0.15s;
+outline: none;
 }
 .search-input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
-  background-color: var(--surface);
+border-color: var(--accent);
+box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+background-color: var(--surface);
 }
 .search-input::placeholder { color: #aaa; }
 .search-clear {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 13px;
-  color: var(--text-muted);
-  padding: 0 4px;
-  display: none;
-  font-family: inherit;
+background: none;
+border: none;
+cursor: pointer;
+font-size: 13px;
+color: var(--text-muted);
+padding: 0 4px;
+display: none;
+font-family: inherit;
 }
 .search-clear:hover { color: var(--text); }
 .search-clear.visible { display: inline; }
 
 /* ── Sort buttons ── */
 .sort-group {
-  display: inline-flex;
-  border: 1.5px solid var(--border);
-  border-radius: 20px;
-  overflow: hidden;
-  background: var(--tag-bg);
+display: inline-flex;
+border: 1.5px solid var(--border);
+border-radius: 20px;
+overflow: hidden;
+background: var(--tag-bg);
 }
 .sort-btn {
-  padding: 4px 13px;
-  border: none;
-  background: transparent;
-  font-size: 12.5px;
-  font-weight: 500;
-  color: var(--text-muted);
-  cursor: pointer;
-  font-family: inherit;
-  transition: all 0.15s;
-  white-space: nowrap;
+padding: 4px 13px;
+border: none;
+background: transparent;
+font-size: 12.5px;
+font-weight: 500;
+color: var(--text-muted);
+cursor: pointer;
+font-family: inherit;
+transition: all 0.15s;
+white-space: nowrap;
 }
 .sort-btn:not(:last-child) {
-  border-right: 1.5px solid var(--border);
+border-right: 1.5px solid var(--border);
 }
 .sort-btn.active {
-  background: var(--accent);
-  color: #fff;
+background: var(--accent);
+color: #fff;
 }
 .sort-btn:not(.active):hover {
-  color: var(--accent);
-  background: var(--accent-light);
+color: var(--accent);
+background: var(--accent-light);
 }
 
 /* ── Subcategory row ── */
 .subcategory-row {
-  margin-top: -4px;
-  padding-left: 8px;
-  border-left: 3px solid var(--accent-light);
-  margin-left: 4px;
+margin-top: -2px;
+padding-left: 8px;
+border-left: 3px solid var(--accent-light);
+margin-left: 4px;
 }
 .subcategory-label {
-  color: var(--accent) !important;
-  font-size: 10px !important;
+color: var(--accent) !important;
+font-size: 10px !important;
 }
 .sub-btn {
-  display: inline-block;
-  padding: 3px 11px;
-  border-radius: 20px;
-  border: 1.5px solid var(--accent-light);
-  background: #fff;
-  color: var(--accent);
-  font-size: 12px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
-  font-family: inherit;
+display: inline-block;
+padding: 3px 11px;
+border-radius: 20px;
+border: 1.5px solid var(--accent-light);
+background: #fff;
+color: var(--accent);
+font-size: 12px;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.15s;
+white-space: nowrap;
+font-family: inherit;
 }
 .sub-btn:hover {
-  background: var(--accent-light);
-  border-color: var(--accent);
+background: var(--accent-light);
+border-color: var(--accent);
 }
 .sub-btn.active {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
+background: var(--accent);
+color: #fff;
+border-color: var(--accent);
+}
+
+/* ── Section tabs ── */
+.section-tabs {
+display: flex;
+border-radius: 20px;
+overflow: hidden;
+border: 1.5px solid var(--border);
+background: var(--tag-bg);
+margin-bottom: 0;
+}
+.section-tab {
+flex: 1;
+padding: 5px 8px;
+border: none;
+background: transparent;
+font-size: 12px;
+font-weight: 600;
+color: var(--text-muted);
+cursor: pointer;
+font-family: inherit;
+transition: all 0.15s;
+white-space: nowrap;
+text-align: center;
+line-height: 1.4;
+}
+.section-tab:not(:last-child) {
+border-right: 1.5px solid var(--border);
+}
+.section-tab.active {
+background: var(--accent);
+color: #fff;
+}
+.section-tab:not(.active):hover {
+background: var(--accent-light);
+color: var(--accent);
+}
+/* アクティブフィルタの点インジケータ */
+.filter-dot {
+display: inline-block;
+width: 6px;
+height: 6px;
+border-radius: 50%;
+background: #f59e0b;
+margin-left: 4px;
+vertical-align: middle;
+opacity: 0;
+transition: opacity 0.15s;
+}
+.filter-dot.on { opacity: 1; }
+/* セクション内容 */
+.section-content .filter-row {
+margin-top: 6px;
+margin-bottom: 0;
+}
+.section-content .subcategory-row {
+margin-top: 4px;
 }
 
 /* ── Keyword highlight ── */
 mark {
-  background: #fef08a;
-  color: inherit;
-  border-radius: 2px;
-  padding: 0 1px;
+background: #fef08a;
+color: inherit;
+border-radius: 2px;
+padding: 0 1px;
 }
 
 /* ── Footer ── */
 footer {
-  text-align: center;
-  padding: 24px 16px;
-  font-size: 12px;
-  color: var(--text-muted);
-  border-top: 1px solid var(--border);
-  background: var(--surface);
+text-align: center;
+padding: 24px 16px;
+font-size: 12px;
+color: var(--text-muted);
+border-top: 1px solid var(--border);
+background: var(--surface);
 }
 
 /* ── Responsive ── */
 @media (max-width: 600px) {
-  header { padding: 14px 16px 12px; }
-  .filter-bar { padding: 10px 16px; top: 64px; }
-  .site-title { font-size: 15px; }
-  .qa-card { padding: 14px 15px 12px; }
-  .tag-badge { margin-left: 0; margin-top: 2px; }
-  .search-input { max-width: 100%; }
+header { padding: 14px 16px 12px; }
+.filter-bar { padding: 8px 16px; top: 64px; }
+.site-title { font-size: 15px; }
+.qa-card { padding: 14px 15px 12px; }
+.tag-badge { margin-left: 0; margin-top: 2px; }
+.search-input { max-width: 100%; }
+.section-tab { font-size: 10.5px; padding: 5px 4px; }
 }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="header-inner">
-    <div class="site-title">勝間塾 公開質問ライブ Q&amp;Aアーカイブ</div>
-    <div class="site-subtitle">公開ライブでの質問と回答の要約・タイムスタンプ付きアーカイブ</div>
-  </div>
+<div class="header-inner">
+<div class="site-title">勝間塾 公開質問ライブ Q&amp;Aアーカイブ</div>
+<div class="site-subtitle">公開ライブでの質問と回答の要約・タイムスタンプ付きアーカイブ</div>
+</div>
 </header>
 
 <div class="filter-bar">
-  <div class="filter-inner">
-    <!-- Search & Sort row -->
-    <div class="filter-row search-row">
-      <span class="filter-label">検索</span>
-      <input type="search" class="search-input" id="search-input"
-             placeholder="キーワードで絞り込む…" oninput="onSearchInput(this.value)">
-      <button class="search-clear" id="search-clear" onclick="clearSearch()">✕ クリア</button>
-      <div class="sort-group" style="margin-left:auto;">
-        <button class="sort-btn active" id="sort-new" onclick="setSort('new')">新しい順</button>
-        <button class="sort-btn" id="sort-old" onclick="setSort('old')">古い順</button>
-      </div>
+<div class="filter-inner">
+
+  <!-- 1. 検索ボックス -->
+  <div class="filter-row search-row">
+    <span class="filter-label">検索</span>
+    <input type="search" class="search-input" id="search-input"
+      placeholder="キーワードで絞り込む…" oninput="onSearchInput(this.value)">
+    <button class="search-clear" id="search-clear" onclick="clearSearch()">✕ クリア</button>
+    <div class="sort-group" style="margin-left:auto;">
+      <button class="sort-btn active" id="sort-new" onclick="setSort('new')">新しい順</button>
+      <button class="sort-btn" id="sort-old" onclick="setSort('old')">古い順</button>
     </div>
-    <!-- Month filter -->
+  </div>
+
+  <!-- セクション切り替えタブ -->
+  <div class="section-tabs">
+    <button class="section-tab active" id="tab-nayami" onclick="showSection('nayami')">悩み別から調べる<span class="filter-dot" id="dot-nayami"></span></button>
+    <button class="section-tab" id="tab-year" onclick="showSection('year')">公開年から調べる<span class="filter-dot" id="dot-year"></span></button>
+    <button class="section-tab" id="tab-type" onclick="showSection('type')">種別タブから調べる<span class="filter-dot" id="dot-type"></span></button>
+  </div>
+
+  <!-- 2. 悩み別から調べる（対象カテゴリ＋サブカテゴリ） -->
+  <div id="section-nayami" class="section-content">
     <div class="filter-row">
-      <span class="filter-label">月</span>
-      <div id="month-filters" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"></div>
-    </div>
-    <!-- Tag filter -->
-    <div class="filter-row">
-      <span class="filter-label">タグ</span>
-      <div id="tag-filters"></div>
-    </div>
-    <!-- Persona filter -->
-    <div class="filter-row">
-      <span class="filter-label">対象者</span>
       <div id="persona-filters"></div>
     </div>
-    <!-- Subcategory filter (対象者選択時のみ表示) -->
+    <!-- サブカテゴリ（対象者選択時のみ表示） -->
     <div class="filter-row subcategory-row" id="subcategory-row" style="display:none;">
       <span class="filter-label subcategory-label">└ 悩み</span>
       <div id="subcategory-filters"></div>
     </div>
   </div>
+
+  <!-- 3. 公開年から調べる -->
+  <div id="section-year" class="section-content" style="display:none;">
+    <div class="filter-row">
+      <div id="month-filters" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"></div>
+    </div>
+  </div>
+
+  <!-- 4. 種別タブから調べる -->
+  <div id="section-type" class="section-content" style="display:none;">
+    <div class="filter-row">
+      <div id="tag-filters"></div>
+    </div>
+  </div>
+
+</div>
 </div>
 
 <main>
-  <div class="stats-bar">
-    <div class="stats-count" id="stats-count"></div>
-    <button class="clear-btn" id="clear-btn" onclick="clearFilters()">絞り込みを解除</button>
-  </div>
-  <div class="qa-list" id="qa-list"></div>
-  <div class="empty-state" id="empty-state" style="display:none;">
-    <p>該当するQ&Aが見つかりませんでした。</p>
-  </div>
+<div class="stats-bar">
+<div class="stats-count" id="stats-count"></div>
+<button class="clear-btn" id="clear-btn" onclick="clearFilters()">絞り込みを解除</button>
+</div>
+<div class="qa-list" id="qa-list"></div>
+<div class="empty-state" id="empty-state" style="display:none;">
+<p>該当するQ&Aが見つかりませんでした。</p>
+</div>
 </main>
 
 <footer>
-  データ出典: 勝間塾 公開質問ライブ（YouTube）&nbsp;／&nbsp;最終更新: 2026年5月
+データ出典: 勝間塾 公開質問ライブ（YouTube）&nbsp;／&nbsp;最終更新: 2026年5月
 </footer>
 
 <script>
 // ── State ──────────────────────────────────────────────
-let activeTag     = null;
-let activeMonth   = null;
-let activePersona     = null;
+let activeTag = null;
+let activeMonth = null;
+let activePersona = null;
 let activeSubcategory = null;
-let searchKw          = '';
-let sortOrder         = 'new'; // 'new' | 'old'
+let searchKw = '';
+let sortOrder = 'new'; // 'new' | 'old'
+let activeSection = 'nayami'; // 'nayami' | 'year' | 'type'
+
+// ── Section tab switcher ───────────────────────────────
+function showSection(name) {
+  activeSection = name;
+  ['nayami', 'year', 'type'].forEach(s => {
+    document.getElementById('section-' + s).style.display = s === name ? '' : 'none';
+    document.getElementById('tab-' + s).classList.toggle('active', s === name);
+  });
+}
 
 // ── Persona definitions (キーワード自動分類) ───────────
 // 将来のサブカテゴリ追加方法:
-//   対象のペルソナの subcategories 配列に
-//   { id: 'ユニークID', label: '表示名', keywords: ['キーワード1', ...] }
-//   を追加するだけでUIに自動反映されます。
+// 対象のペルソナの subcategories 配列に
+// { id: 'ユニークID', label: '表示名', keywords: ['キーワード1', ...] }
+// を追加するだけでUIに自動反映されます。
 const PERSONAS = [
-  { id: 'freelance', label: '個人事業主・フリーランス',
-    keywords: ['副業','フリーランス','フリー','個人事業','開業','起業','集客','案件','受注',
-               '自営','独立','コンサル','業務委託','単価','値付け','法人化','クライアント',
-               '事業者','フリーター'],
-    subcategories: [
-      { id: 'freelance_kyakku', label: '集客の悩み',
-        keywords: ['集客','来客','お客','顧客','リピーター','常連','口コミ','紹介',
-                   'SNS発信','フォロワー','宣伝','広告','マーケティング','ブランディング',
-                   'ニッチ','差別化','認知','ファン'] },
-      { id: 'freelance_kakaku', label: '価格設定',
-        keywords: ['価格','単価','値付け','値段','料金','費用','報酬','相場',
-                   'プライシング','値上げ','値下げ','割引','安売り','高単価',
-                   '適正価格','見積もり','請求'] },
-      // ↓ ここに次のサブカテゴリを追加してください
-    ]
-  },
-  { id: 'employee', label: '会社員',
-    keywords: ['転職','会社員','正社員','昇進','残業','上司','職場','給料','雇用','退職',
-               '就職','採用','同僚','異動','昇給','コンプライアンス','中途入社','勤務先',
-               '管理職','部下','部署','サラリーマン'],
-    subcategories: [
-      // ↓ ここにサブカテゴリを追加してください
-    ]
-  },
-  { id: 'parent', label: '主婦・育児中',
-    keywords: ['主婦','育児','子育て','産休','育休','子ども','子供','息子','娘','夫',
-               '専業','家事','保育','幼稚園','小学生','中学生','高校生','受験','ママ',
-               'パパ','赤ちゃん','乳幼児'],
-    subcategories: [
-      // ↓ ここにサブカテゴリを追加してください
-    ]
-  },
-  { id: 'investor', label: '投資・資産形成',
-    keywords: ['投資','資産運用','株','ETF','積立','ポートフォリオ','オルカン','配当',
-               '利回り','NISA','iDeCo','資産形成','老後資金','年金','ドルコスト',
-               'リバランス','金融資産','証券','インデックス'],
-    subcategories: [
-      { id: 'investor_retire', label: 'リタイア後',
-        keywords: ['定年','リタイア','老後','60歳','65歳','70歳','シニア','退職金',
-                   'セカンドライフ','引退','リタイアメント','60代','70代','熟年',
-                   'リタイアメントインカム','取り崩し','資産取崩し'] },
-      { id: 'investor_current', label: '現役世代',
-        keywords: ['積立投資を始め','今すぐ始め','ドルコスト平均法で積立',
-                   'コツコツ続け','資産形成を始め','投資を始め','積立を始め',
-                   '運用を始め','これから運用'] },
-      { id: 'investor_legacy', label: '贈与・相続',
-        keywords: ['贈与','相続','遺産','生前贈与','贈与税','相続税','遺言'] },
-      // ↓ ここに次のサブカテゴリを追加してください
-    ]
-  },
+{ id: 'freelance', label: '個人事業主・フリーランス',
+  keywords: ['副業','フリーランス','フリー','個人事業','開業','起業','集客','案件','受注',
+              '自営','独立','コンサル','業務委託','単価','値付け','法人化','クライアント',
+              '事業者','フリーター'],
+  subcategories: [
+    { id: 'freelance_kyakku', label: '集客の悩み',
+      keywords: ['集客','来客','お客','顧客','リピーター','常連','口コミ','紹介',
+                  'SNS発信','フォロワー','宣伝','広告','マーケティング','ブランディング',
+                  'ニッチ','差別化','認知','ファン'] },
+    { id: 'freelance_kakaku', label: '価格設定',
+      keywords: ['価格','単価','値付け','値段','料金','費用','報酬','相場',
+                  'プライシング','値上げ','値下げ','割引','安売り','高単価',
+                  '適正価格','見積もり','請求'] },
+    // ↓ ここに次のサブカテゴリを追加してください
+  ]
+},
+{ id: 'employee', label: '会社員',
+  keywords: ['転職','会社員','正社員','昇進','残業','上司','職場','給料','雇用','退職',
+              '就職','採用','同僚','異動','昇給','コンプライアンス','中途入社','勤務先',
+              '管理職','部下','部署','サラリーマン'],
+  subcategories: [
+    // ↓ ここにサブカテゴリを追加してください
+  ]
+},
+{ id: 'parent', label: '主婦・育児中',
+  keywords: ['主婦','育児','子育て','産休','育休','子ども','子供','息子','娘','夫',
+              '専業','家事','保育','幼稚園','小学生','中学生','高校生','受験','ママ',
+              'パパ','赤ちゃん','乳幼児'],
+  subcategories: [
+    // ↓ ここにサブカテゴリを追加してください
+  ]
+},
+{ id: 'investor', label: '投資・資産形成',
+  keywords: ['投資','資産運用','株','ETF','積立','ポートフォリオ','オルカン','配当',
+              '利回り','NISA','iDeCo','資産形成','老後資金','年金','ドルコスト',
+              'リバランス','金融資産','証券','インデックス'],
+  subcategories: [
+    { id: 'investor_retire', label: 'リタイア後',
+      keywords: ['定年','リタイア','老後','60歳','65歳','70歳','シニア','退職金',
+                  'セカンドライフ','引退','リタイアメント','60代','70代','熟年',
+                  'リタイアメントインカム','取り崩し','資産取崩し'] },
+    { id: 'investor_current', label: '現役世代',
+      keywords: ['積立投資を始め','今すぐ始め','ドルコスト平均法で積立',
+                  'コツコツ続け','資産形成を始め','投資を始め','積立を始め',
+                  '運用を始め','これから運用'] },
+    { id: 'investor_legacy', label: '贈与・相続',
+      keywords: ['贈与','相続','遺産','生前贈与','贈与税','相続税','遺言'] },
+    // ↓ ここに次のサブカテゴリを追加してください
+  ]
+},
 ];
 
 // 手動ペルソナ補正マップ（キー: videoId_qNum）
 // 自動分類を上書きします。[] = どのペルソナにも属さない
 const PERSONA_OVERRIDES = {
-  // 会社員に変更
-  'Hjkg4SjdpAA_14': ['employee'],  // 工事さん（処理速度低い）
-  'Pb_bE5BTGas_4':  ['employee'],  // ママさん（人材紹介業AI）
-  'am5GP0ISRJU_15': ['employee'],  // おにゃんこさん（夫転職・起業）
-  'sNxpJRqdmsY_5':  ['employee'],  // 富士さん（副業前提・雇用形態変更）
-  'Fijc_0APDE4_8':  ['employee'],  // 匿名（公立高校教員）
-  '4aV7fxH4A9g_4':  ['employee'],  // み大阪さん（30代・時短勤務）
-  'v0m3k1X8-3I_11': ['employee'],  // プチさん（公務員10年）
-  'afgysjdnV6A_8':  ['employee'],  // おかゆさん（やりたいことが見つからない）
-  'afgysjdnV6A_15': ['employee'],  // スズメさん（転職活動中）
-  'Pbi3h45cLsc_18': ['employee'],  // ママ営業あきちゃんさん（脱サラ希望）
-  'uAo_jg-O24c_10': ['employee'],  // まりさん（IT企業マーケ事務）
-  'uAo_jg-O24c_18': ['employee'],  // かよさん（公認会計士）
-  'ul35MFpIksc_3':  ['employee'],  // 松丸さん（コンサル復職）
-  'YB5nvrEENQI_7':  ['employee'],  // 子さん（会計士12年）
-  'YB5nvrEENQI_11': ['employee'],  // 投資家テットさん（ファンド社員）
-  'FCdAx5sQNp8_18': ['employee'],  // みこさん（管理職・4月退職計画）
-
-  // 主婦・育児中に変更
-  '4dundD3CHQM_15': ['parent'],    // まりさん（19歳息子・インフル予防接種）
-  'Pbi3h45cLsc_20': ['parent'],    // 自活等さん（美術系大学院生の子供）
-
-  // 個人事業主のみ（元：フリーランス / 投資・資産形成の重複を解消）
-  'v0m3k1X8-3I_15': ['freelance'], // アンディさん（希少な靴収集）
-  'D6oeLGstt7k_22': ['freelance'], // ひろさん（副業・投資ブログ）
-
-  // どのペルソナにも属さない（空白）
-  '4dundD3CHQM_17': [],  // エルフィーさん（夫のフキハラ）
-  'Fijc_0APDE4_9':  [],  // 島さん（家庭内別居・離婚）
-  'Fijc_0APDE4_12': [],  // プチさん（詐欺・フィッシング対策）
-  '4aV7fxH4A9g_19': [],  // コロンさん（自己決定できるようになった経緯）
-  'v0m3k1X8-3I_9':  [],  // 猫さん（食費15万円・フードファディズム）
-  'v0m3k1X8-3I_10': [],  // 花さん（91歳・85歳の両親支援）
-  'D6oeLGstt7k_1':  [],  // 小一さん（グルテンフリー・カゼインフリー）
-  'nf-NU3_x2Io_16': [],  // ボルボックスさん（高3の娘と夫が不仲）
-  'uAo_jg-O24c_3':  [],  // ベリーさん（古民家購入・改装）
-  'uAo_jg-O24c_5':  [],  // 宮さん（60歳フリーランス研究者・役職）
-  'uAo_jg-O24c_19': [],  // もちもちのきさん（理不尽な対応でフリーズ）
-  'ul35MFpIksc_2':  [],  // いしさん（MBA留学・独立開業）
-  'YB5nvrEENQI_24': [],  // リコさん（アラフォー起業家・婚活）
-  'biwr0ats-5Q_19': [],  // り子さん（物価高の生活者・事業者と話す際）
+// 会社員に変更
+'Hjkg4SjdpAA_14': ['employee'],
+'Pb_bE5BTGas_4': ['employee'],
+'am5GP0ISRJU_15': ['employee'],
+'sNxpJRqdmsY_5': ['employee'],
+'Fijc_0APDE4_8': ['employee'],
+'4aV7fxH4A9g_4': ['employee'],
+'v0m3k1X8-3I_11': ['employee'],
+'afgysjdnV6A_8': ['employee'],
+'afgysjdnV6A_15': ['employee'],
+'Pbi3h45cLsc_18': ['employee'],
+'uAo_jg-O24c_10': ['employee'],
+'uAo_jg-O24c_18': ['employee'],
+'ul35MFpIksc_3': ['employee'],
+'YB5nvrEENQI_7': ['employee'],
+'YB5nvrEENQI_11': ['employee'],
+'FCdAx5sQNp8_18': ['employee'],
+// 主婦・育児中に変更
+'4dundD3CHQM_15': ['parent'],
+'Pbi3h45cLsc_20': ['parent'],
+// 個人事業主のみ
+'v0m3k1X8-3I_15': ['freelance'],
+'D6oeLGstt7k_22': ['freelance'],
+// どのペルソナにも属さない
+'4dundD3CHQM_17': [],
+'Fijc_0APDE4_9': [],
+'Fijc_0APDE4_12': [],
+'4aV7fxH4A9g_19': [],
+'v0m3k1X8-3I_9': [],
+'v0m3k1X8-3I_10': [],
+'D6oeLGstt7k_1': [],
+'nf-NU3_x2Io_16': [],
+'uAo_jg-O24c_3': [],
+'uAo_jg-O24c_5': [],
+'uAo_jg-O24c_19': [],
+'ul35MFpIksc_2': [],
+'YB5nvrEENQI_24': [],
+'biwr0ats-5Q_19': [],
 };
 
 // Q&Aがどのペルソナに該当するかを返す
 function getPersonas(d) {
-  const key = d.videoId + '_' + d.qNum;
-  if (key in PERSONA_OVERRIDES) return PERSONA_OVERRIDES[key];
-  const text = d.question + ' ' + d.answer + ' ' + (d.name || '');
-  return PERSONAS.filter(p => p.keywords.some(k => text.includes(k))).map(p => p.id);
+const key = d.videoId + '_' + d.qNum;
+if (key in PERSONA_OVERRIDES) return PERSONA_OVERRIDES[key];
+const text = d.question + ' ' + d.answer + ' ' + (d.name || '');
+return PERSONAS.filter(p => p.keywords.some(k => text.includes(k))).map(p => p.id);
 }
 
 // Q&Aが指定ペルソナの指定サブカテゴリに該当するか判定
 function matchesSubcategory(d, personaId, subcategoryId) {
-  const persona = PERSONAS.find(p => p.id === personaId);
-  if (!persona) return false;
-  const sub = (persona.subcategories || []).find(s => s.id === subcategoryId);
-  if (!sub) return false;
-  const text = d.question + ' ' + d.answer;
-  return sub.keywords.some(k => text.includes(k));
+const persona = PERSONAS.find(p => p.id === personaId);
+if (!persona) return false;
+const sub = (persona.subcategories || []).find(s => s.id === subcategoryId);
+if (!sub) return false;
+const text = d.question + ' ' + d.answer;
+return sub.keywords.some(k => text.includes(k));
 }
 
 // ── Build month list from data ──────────────────────────
 function getMonths() {
-  const map = new Map();
-  QA_DATA.forEach(d => {
-    const key = `${d.year}_${String(d.month).padStart(2,'0')}`;
-    if (!map.has(key)) map.set(key, d.monthLabel);
-  });
-  return [...map.entries()]
-    .sort((a, b) => b[0].localeCompare(a[0])) // newest-first
-    .map(([key, label]) => ({ key, label }));
+const map = new Map();
+QA_DATA.forEach(d => {
+  const key = `${d.year}_${String(d.month).padStart(2,'0')}`;
+  if (!map.has(key)) map.set(key, d.monthLabel);
+});
+return [...map.entries()]
+  .sort((a, b) => b[0].localeCompare(a[0]))
+  .map(([key, label]) => ({ key, label }));
 }
 
 // ── Sort toggle ────────────────────────────────────────
 function setSort(order) {
-  sortOrder = order;
-  document.getElementById('sort-new').classList.toggle('active', order === 'new');
-  document.getElementById('sort-old').classList.toggle('active', order === 'old');
-  renderAll();
+sortOrder = order;
+document.getElementById('sort-new').classList.toggle('active', order === 'new');
+document.getElementById('sort-old').classList.toggle('active', order === 'old');
+renderAll();
 }
 
 // ── Search input handler ───────────────────────────────
 function onSearchInput(val) {
-  searchKw = val.trim();
-  const clearBtn = document.getElementById('search-clear');
-  clearBtn.classList.toggle('visible', searchKw.length > 0);
-  renderAll();
+searchKw = val.trim();
+const clearBtn = document.getElementById('search-clear');
+clearBtn.classList.toggle('visible', searchKw.length > 0);
+renderAll();
 }
 function clearSearch() {
-  searchKw = '';
-  const input = document.getElementById('search-input');
-  input.value = '';
-  document.getElementById('search-clear').classList.remove('visible');
-  renderAll();
+searchKw = '';
+const input = document.getElementById('search-input');
+input.value = '';
+document.getElementById('search-clear').classList.remove('visible');
+renderAll();
 }
 
 // ── Render filter buttons ──────────────────────────────
 function renderFilters() {
-  // ── Month filter: "すべて" ボタン + 年ごとのセレクトボックス ──
-  const monthContainer = document.getElementById('month-filters');
-  monthContainer.innerHTML = '';
+// ── Month filter: "すべて" ボタン + 年ごとのセレクトボックス ──
+const monthContainer = document.getElementById('month-filters');
+monthContainer.innerHTML = '';
 
-  // "すべて" ボタン
-  const allMonthBtn = document.createElement('button');
-  allMonthBtn.className = 'month-btn' + (activeMonth === null ? ' active' : '');
-  allMonthBtn.textContent = 'すべて';
-  allMonthBtn.onclick = () => { activeMonth = null; renderAll(); };
-  monthContainer.appendChild(allMonthBtn);
+const allMonthBtn = document.createElement('button');
+allMonthBtn.className = 'month-btn' + (activeMonth === null ? ' active' : '');
+allMonthBtn.textContent = 'すべて';
+allMonthBtn.onclick = () => { activeMonth = null; renderAll(); };
+monthContainer.appendChild(allMonthBtn);
 
-  // 年ごとにグループ化（新しい年順）
-  const yearMap = new Map();
-  getMonths().forEach(({ key, label }) => {
-    const year = key.split('_')[0];
-    if (!yearMap.has(year)) yearMap.set(year, []);
-    yearMap.get(year).push({ key, label });
-  });
+const yearMap = new Map();
+getMonths().forEach(({ key, label }) => {
+  const year = key.split('_')[0];
+  if (!yearMap.has(year)) yearMap.set(year, []);
+  yearMap.get(year).push({ key, label });
+});
 
-  [...yearMap.entries()]
-    .sort((a, b) => Number(b[0]) - Number(a[0]))
-    .forEach(([year, months]) => {
-      const isActive = months.some(m => m.key === activeMonth);
-      const select = document.createElement('select');
-      select.className = 'year-select' + (isActive ? ' active' : '');
+[...yearMap.entries()]
+  .sort((a, b) => Number(b[0]) - Number(a[0]))
+  .forEach(([year, months]) => {
+    const isActive = months.some(m => m.key === activeMonth);
+    const select = document.createElement('select');
+    select.className = 'year-select' + (isActive ? ' active' : '');
 
-      // デフォルト選択肢（年ラベル）
-      const defaultOpt = document.createElement('option');
-      defaultOpt.value = '';
-      defaultOpt.textContent = year + '年';
-      select.appendChild(defaultOpt);
+    const defaultOpt = document.createElement('option');
+    defaultOpt.value = '';
+    defaultOpt.textContent = year + '年';
+    select.appendChild(defaultOpt);
 
-      // 月の選択肢
-      months.forEach(({ key, label }) => {
-        const opt = document.createElement('option');
-        opt.value = key;
-        // 年部分を除いて「5月」のみ表示
-        opt.textContent = label.replace(year + '年', '');
-        if (activeMonth === key) opt.selected = true;
-        select.appendChild(opt);
-      });
-
-      select.onchange = () => {
-        activeMonth = select.value || null;
-        renderAll();
-      };
-
-      monthContainer.appendChild(select);
+    months.forEach(({ key, label }) => {
+      const opt = document.createElement('option');
+      opt.value = key;
+      opt.textContent = label.replace(year + '年', '');
+      if (activeMonth === key) opt.selected = true;
+      select.appendChild(opt);
     });
 
-  // ── Tag buttons ──
-  const tagContainer = document.getElementById('tag-filters');
-  tagContainer.innerHTML = '';
-  const allTagBtn = document.createElement('button');
-  allTagBtn.className = 'tag-btn' + (activeTag === null ? ' active' : '');
-  allTagBtn.textContent = 'すべて';
-  allTagBtn.onclick = () => { activeTag = null; renderAll(); };
-  tagContainer.appendChild(allTagBtn);
-  ALL_TAGS.forEach(tag => {
-    const btn = document.createElement('button');
-    btn.className = 'tag-btn' + (activeTag === tag ? ' active' : '');
-    btn.textContent = tag;
-    btn.onclick = () => { activeTag = tag; renderAll(); };
-    tagContainer.appendChild(btn);
-  });
-
-  // ── Persona buttons ──
-  const personaContainer = document.getElementById('persona-filters');
-  personaContainer.innerHTML = '';
-  const allPersonaBtn = document.createElement('button');
-  allPersonaBtn.className = 'tag-btn' + (activePersona === null ? ' active' : '');
-  allPersonaBtn.textContent = 'すべて';
-  allPersonaBtn.onclick = () => { activePersona = null; activeSubcategory = null; renderAll(); };
-  personaContainer.appendChild(allPersonaBtn);
-  PERSONAS.forEach(p => {
-    const btn = document.createElement('button');
-    btn.className = 'tag-btn' + (activePersona === p.id ? ' active' : '');
-    btn.textContent = p.label;
-    btn.onclick = () => {
-      if (activePersona !== p.id) activeSubcategory = null; // ペルソナ変更時はサブカテゴリをリセット
-      activePersona = p.id;
+    select.onchange = () => {
+      activeMonth = select.value || null;
       renderAll();
     };
-    personaContainer.appendChild(btn);
+
+    monthContainer.appendChild(select);
   });
 
-  // ── Subcategory buttons ──
-  const subcategoryRow = document.getElementById('subcategory-row');
-  const subcategoryContainer = document.getElementById('subcategory-filters');
-  const currentPersona = PERSONAS.find(p => p.id === activePersona);
-  const subs = (currentPersona && currentPersona.subcategories) ? currentPersona.subcategories : [];
+// ── Tag buttons ──
+const tagContainer = document.getElementById('tag-filters');
+tagContainer.innerHTML = '';
+const allTagBtn = document.createElement('button');
+allTagBtn.className = 'tag-btn' + (activeTag === null ? ' active' : '');
+allTagBtn.textContent = 'すべて';
+allTagBtn.onclick = () => { activeTag = null; renderAll(); };
+tagContainer.appendChild(allTagBtn);
+ALL_TAGS.forEach(tag => {
+  const btn = document.createElement('button');
+  btn.className = 'tag-btn' + (activeTag === tag ? ' active' : '');
+  btn.textContent = tag;
+  btn.onclick = () => { activeTag = tag; renderAll(); };
+  tagContainer.appendChild(btn);
+});
 
-  if (activePersona !== null && subs.length > 0) {
-    subcategoryRow.style.display = '';
-    subcategoryContainer.innerHTML = '';
+// ── Persona buttons ──
+const personaContainer = document.getElementById('persona-filters');
+personaContainer.innerHTML = '';
+const allPersonaBtn = document.createElement('button');
+allPersonaBtn.className = 'tag-btn' + (activePersona === null ? ' active' : '');
+allPersonaBtn.textContent = 'すべて';
+allPersonaBtn.onclick = () => { activePersona = null; activeSubcategory = null; renderAll(); };
+personaContainer.appendChild(allPersonaBtn);
+PERSONAS.forEach(p => {
+  const btn = document.createElement('button');
+  btn.className = 'tag-btn' + (activePersona === p.id ? ' active' : '');
+  btn.textContent = p.label;
+  btn.onclick = () => {
+    if (activePersona !== p.id) activeSubcategory = null;
+    activePersona = p.id;
+    renderAll();
+  };
+  personaContainer.appendChild(btn);
+});
 
-    // 「すべて」ボタン
-    const allSubBtn = document.createElement('button');
-    allSubBtn.className = 'sub-btn' + (activeSubcategory === null ? ' active' : '');
-    allSubBtn.textContent = 'すべて';
-    allSubBtn.onclick = () => { activeSubcategory = null; renderAll(); };
-    subcategoryContainer.appendChild(allSubBtn);
+// ── Subcategory buttons ──
+const subcategoryRow = document.getElementById('subcategory-row');
+const subcategoryContainer = document.getElementById('subcategory-filters');
+const currentPersona = PERSONAS.find(p => p.id === activePersona);
+const subs = (currentPersona && currentPersona.subcategories) ? currentPersona.subcategories : [];
 
-    // 各サブカテゴリ
-    subs.forEach(s => {
-      const btn = document.createElement('button');
-      btn.className = 'sub-btn' + (activeSubcategory === s.id ? ' active' : '');
-      btn.textContent = s.label;
-      btn.onclick = () => { activeSubcategory = s.id; renderAll(); };
-      subcategoryContainer.appendChild(btn);
-    });
-  } else {
-    subcategoryRow.style.display = 'none';
-    activeSubcategory = null; // サブカテゴリが存在しないペルソナに切り替えた場合はリセット
-  }
+if (activePersona !== null && subs.length > 0) {
+  subcategoryRow.style.display = '';
+  subcategoryContainer.innerHTML = '';
+
+  const allSubBtn = document.createElement('button');
+  allSubBtn.className = 'sub-btn' + (activeSubcategory === null ? ' active' : '');
+  allSubBtn.textContent = 'すべて';
+  allSubBtn.onclick = () => { activeSubcategory = null; renderAll(); };
+  subcategoryContainer.appendChild(allSubBtn);
+
+  subs.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'sub-btn' + (activeSubcategory === s.id ? ' active' : '');
+    btn.textContent = s.label;
+    btn.onclick = () => { activeSubcategory = s.id; renderAll(); };
+    subcategoryContainer.appendChild(btn);
+  });
+} else {
+  subcategoryRow.style.display = 'none';
+  activeSubcategory = null;
+}
+
+// ── セクションタブのアクティブフィルタ点インジケータ ──
+document.getElementById('dot-nayami').classList.toggle('on', activePersona !== null || activeSubcategory !== null);
+document.getElementById('dot-year').classList.toggle('on', activeMonth !== null);
+document.getElementById('dot-type').classList.toggle('on', activeTag !== null);
 }
 
 // ── Filter & sort data ─────────────────────────────────
 function getFiltered() {
-  const kwLower = searchKw.toLowerCase();
-  let result = QA_DATA.filter(d => {
-    const monthKey   = `${d.year}_${String(d.month).padStart(2,'0')}`;
-    const monthOk    = activeMonth   === null || monthKey === activeMonth;
-    const tagOk      = activeTag     === null || d.tag    === activeTag;
-    const personaOk  = activePersona === null || getPersonas(d).includes(activePersona);
-    const subOk      = activeSubcategory === null || matchesSubcategory(d, activePersona, activeSubcategory);
-    const kwOk       = !kwLower || [d.question, d.answer, d.name, d.tag, d.monthLabel]
-                         .some(s => s.toLowerCase().includes(kwLower));
-    return monthOk && tagOk && personaOk && subOk && kwOk;
-  });
-  if (sortOrder === 'old') result = result.slice().reverse();
-  return result;
+const kwLower = searchKw.toLowerCase();
+let result = QA_DATA.filter(d => {
+  const monthKey = `${d.year}_${String(d.month).padStart(2,'0')}`;
+  const monthOk = activeMonth === null || monthKey === activeMonth;
+  const tagOk = activeTag === null || d.tag === activeTag;
+  const personaOk = activePersona === null || getPersonas(d).includes(activePersona);
+  const subOk = activeSubcategory === null || matchesSubcategory(d, activePersona, activeSubcategory);
+  const kwOk = !kwLower || [d.question, d.answer, d.name, d.tag, d.monthLabel]
+    .some(s => s.toLowerCase().includes(kwLower));
+  return monthOk && tagOk && personaOk && subOk && kwOk;
+});
+if (sortOrder === 'old') result = result.slice().reverse();
+return result;
 }
 
 // ── YouTube URL ────────────────────────────────────────
 function ytUrl(videoId, seconds) {
-  return `https://www.youtube.com/watch?v=${videoId}&t=${seconds}s`;
+return `https://www.youtube.com/watch?v=${videoId}&t=${seconds}s`;
 }
 
 // ── Escape HTML ────────────────────────────────────────
 function escHtml(str) {
-  return str
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;');
+return str
+  .replace(/&/g,'&amp;')
+  .replace(/</g,'&lt;')
+  .replace(/>/g,'&gt;')
+  .replace(/"/g,'&quot;');
 }
 
 // ── Highlight keyword in already-escaped HTML string ──
 function highlight(escapedStr) {
-  if (!searchKw) return escapedStr;
-  const escaped = escHtml(searchKw);
-  const re = new RegExp(escaped.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'gi');
-  return escapedStr.replace(re, m => `<mark>${m}</mark>`);
+if (!searchKw) return escapedStr;
+const escaped = escHtml(searchKw);
+const re = new RegExp(escaped.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'gi');
+return escapedStr.replace(re, m => `<mark>${m}</mark>`);
 }
 
 // ── Render cards ───────────────────────────────────────
 function renderCards(data) {
-  const list  = document.getElementById('qa-list');
-  const empty = document.getElementById('empty-state');
-  list.innerHTML = '';
-  if (data.length === 0) { empty.style.display = 'block'; return; }
-  empty.style.display = 'none';
+const list = document.getElementById('qa-list');
+const empty = document.getElementById('empty-state');
+list.innerHTML = '';
+if (data.length === 0) { empty.style.display = 'block'; return; }
+empty.style.display = 'none';
 
-  // Group by monthLabel
-  const groups = new Map();
-  data.forEach(d => {
-    if (!groups.has(d.monthLabel)) groups.set(d.monthLabel, []);
-    groups.get(d.monthLabel).push(d);
+const groups = new Map();
+data.forEach(d => {
+  if (!groups.has(d.monthLabel)) groups.set(d.monthLabel, []);
+  groups.get(d.monthLabel).push(d);
+});
+
+const showGroupHeaders = activeMonth === null && !searchKw && getMonths().length > 1;
+
+groups.forEach((items, monthLabel) => {
+  if (showGroupHeaders) {
+    const header = document.createElement('div');
+    header.className = 'month-group-header';
+    header.textContent = monthLabel;
+    list.appendChild(header);
+  }
+  items.forEach(d => {
+    const card = document.createElement('div');
+    card.className = 'qa-card';
+    const qHtml = highlight(escHtml(d.question));
+    const aHtml = highlight(escHtml(d.answer));
+    const nHtml = highlight(escHtml(d.name));
+    card.innerHTML = `
+<div class="card-meta">
+  <span class="q-num">Q${d.qNum}</span>
+  <span class="month-badge">${escHtml(d.monthLabel)}</span>
+  <span class="name-badge">${nHtml}</span>
+  <span class="tag-badge">${escHtml(d.tag)}</span>
+</div>
+<div class="q-section">
+  <div class="q-label">Q</div>
+  <div class="q-text">${qHtml}</div>
+</div>
+<div class="a-section">
+  <div class="a-label">A</div>
+  <div class="a-text">${aHtml}</div>
+</div>
+<div class="card-footer">
+  <a class="yt-link" href="${ytUrl(d.videoId, d.seconds)}" target="_blank" rel="noopener">
+    <svg class="yt-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1C4.5 20.4 12 20.4 12 20.4s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/>
+    </svg>
+    ${escHtml(d.timestamp)} から見る
+  </a>
+</div>
+`;
+    list.appendChild(card);
   });
-
-  const showGroupHeaders = activeMonth === null && !searchKw && getMonths().length > 1;
-
-  groups.forEach((items, monthLabel) => {
-    if (showGroupHeaders) {
-      const header = document.createElement('div');
-      header.className = 'month-group-header';
-      header.textContent = monthLabel;
-      list.appendChild(header);
-    }
-    items.forEach(d => {
-      const card = document.createElement('div');
-      card.className = 'qa-card';
-      const qHtml = highlight(escHtml(d.question));
-      const aHtml = highlight(escHtml(d.answer));
-      const nHtml = highlight(escHtml(d.name));
-      card.innerHTML = `
-        <div class="card-meta">
-          <span class="q-num">Q${d.qNum}</span>
-          <span class="month-badge">${escHtml(d.monthLabel)}</span>
-          <span class="name-badge">${nHtml}</span>
-          <span class="tag-badge">${escHtml(d.tag)}</span>
-        </div>
-        <div class="q-section">
-          <div class="q-label">Q</div>
-          <div class="q-text">${qHtml}</div>
-        </div>
-        <div class="a-section">
-          <div class="a-label">A</div>
-          <div class="a-text">${aHtml}</div>
-        </div>
-        <div class="card-footer">
-          <a class="yt-link" href="${ytUrl(d.videoId, d.seconds)}" target="_blank" rel="noopener">
-            <svg class="yt-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1C4.5 20.4 12 20.4 12 20.4s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/>
-            </svg>
-            ${escHtml(d.timestamp)} から見る
-          </a>
-        </div>
-      `;
-      list.appendChild(card);
-    });
-  });
+});
 }
 
 // ── Stats & clear button ───────────────────────────────
 function renderStats(data) {
-  const el    = document.getElementById('stats-count');
-  const total = QA_DATA.length;
-  const hasFilter = activeTag !== null || activeMonth !== null || activePersona !== null || activeSubcategory !== null || searchKw;
-  if (!hasFilter) {
-    el.innerHTML = `<strong>${total}</strong> 件`;
-  } else {
-    let hint = '';
-    if (searchKw) hint += `「${escHtml(searchKw)}」`;
-    el.innerHTML = `<strong>${data.length}</strong> 件表示中${hint}（全 ${total} 件）`;
-  }
-  const clearBtn = document.getElementById('clear-btn');
-  if (activeTag !== null || activeMonth !== null || activePersona !== null || activeSubcategory !== null) {
-    clearBtn.classList.add('visible');
-  } else {
-    clearBtn.classList.remove('visible');
-  }
+const el = document.getElementById('stats-count');
+const total = QA_DATA.length;
+const hasFilter = activeTag !== null || activeMonth !== null || activePersona !== null || activeSubcategory !== null || searchKw;
+if (!hasFilter) {
+  el.innerHTML = `<strong>${total}</strong> 件`;
+} else {
+  let hint = '';
+  if (searchKw) hint += `「${escHtml(searchKw)}」`;
+  el.innerHTML = `<strong>${data.length}</strong> 件表示中${hint}（全 ${total} 件）`;
+}
+const clearBtn = document.getElementById('clear-btn');
+if (activeTag !== null || activeMonth !== null || activePersona !== null || activeSubcategory !== null) {
+  clearBtn.classList.add('visible');
+} else {
+  clearBtn.classList.remove('visible');
+}
 }
 
 // ── Clear all filters ──────────────────────────────────
 function clearFilters() {
-  activeTag         = null;
-  activeMonth       = null;
-  activePersona     = null;
-  activeSubcategory = null;
-  renderAll();
+activeTag = null;
+activeMonth = null;
+activePersona = null;
+activeSubcategory = null;
+renderAll();
 }
 
 // ── Full render cycle ──────────────────────────────────
 function renderAll() {
-  const data = getFiltered();
-  renderFilters();
-  renderCards(data);
-  renderStats(data);
+const data = getFiltered();
+renderFilters();
+renderCards(data);
+renderStats(data);
 }
 
 // ── Init ───────────────────────────────────────────────
