@@ -484,6 +484,11 @@ footer {
       <span class="filter-label">タグ</span>
       <div id="tag-filters"></div>
     </div>
+    <!-- Persona filter -->
+    <div class="filter-row">
+      <span class="filter-label">対象者</span>
+      <div id="persona-filters"></div>
+    </div>
   </div>
 </div>
 
@@ -504,10 +509,37 @@ footer {
 
 <script>
 // ── State ──────────────────────────────────────────────
-let activeTag   = null;
-let activeMonth = null;
-let searchKw    = '';
-let sortOrder   = 'new'; // 'new' | 'old'
+let activeTag     = null;
+let activeMonth   = null;
+let activePersona = null;
+let searchKw      = '';
+let sortOrder     = 'new'; // 'new' | 'old'
+
+// ── Persona definitions (キーワード自動分類) ───────────
+const PERSONAS = [
+  { id: 'freelance', label: '個人事業主・フリーランス',
+    keywords: ['副業','フリーランス','フリー','個人事業','開業','起業','集客','案件','受注',
+               '自営','独立','コンサル','業務委託','単価','値付け','法人化','クライアント',
+               '事業者','フリーター'] },
+  { id: 'employee', label: '会社員',
+    keywords: ['転職','会社員','正社員','昇進','残業','上司','職場','給料','雇用','退職',
+               '就職','採用','同僚','異動','昇給','コンプライアンス','中途入社','勤務先',
+               '管理職','部下','部署','サラリーマン'] },
+  { id: 'parent', label: '主婦・育児中',
+    keywords: ['主婦','育児','子育て','産休','育休','子ども','子供','息子','娘','夫',
+               '専業','家事','保育','幼稚園','小学生','中学生','高校生','受験','ママ',
+               'パパ','赤ちゃん','乳幼児'] },
+  { id: 'investor', label: '投資・資産形成',
+    keywords: ['投資','資産運用','株','ETF','積立','ポートフォリオ','オルカン','配当',
+               '利回り','NISA','iDeCo','資産形成','老後資金','年金','ドルコスト',
+               'リバランス','金融資産','証券','インデックス'] },
+];
+
+// Q&Aがどのペルソナに該当するかを返す
+function getPersonas(d) {
+  const text = d.question + ' ' + d.answer + ' ' + (d.name || '');
+  return PERSONAS.filter(p => p.keywords.some(k => text.includes(k))).map(p => p.id);
+}
 
 // ── Build month list from data ──────────────────────────
 function getMonths() {
@@ -596,7 +628,7 @@ function renderFilters() {
       monthContainer.appendChild(select);
     });
 
-  // ── Tag buttons (変更なし) ──
+  // ── Tag buttons ──
   const tagContainer = document.getElementById('tag-filters');
   tagContainer.innerHTML = '';
   const allTagBtn = document.createElement('button');
@@ -611,18 +643,35 @@ function renderFilters() {
     btn.onclick = () => { activeTag = tag; renderAll(); };
     tagContainer.appendChild(btn);
   });
+
+  // ── Persona buttons ──
+  const personaContainer = document.getElementById('persona-filters');
+  personaContainer.innerHTML = '';
+  const allPersonaBtn = document.createElement('button');
+  allPersonaBtn.className = 'tag-btn' + (activePersona === null ? ' active' : '');
+  allPersonaBtn.textContent = 'すべて';
+  allPersonaBtn.onclick = () => { activePersona = null; renderAll(); };
+  personaContainer.appendChild(allPersonaBtn);
+  PERSONAS.forEach(p => {
+    const btn = document.createElement('button');
+    btn.className = 'tag-btn' + (activePersona === p.id ? ' active' : '');
+    btn.textContent = p.label;
+    btn.onclick = () => { activePersona = p.id; renderAll(); };
+    personaContainer.appendChild(btn);
+  });
 }
 
 // ── Filter & sort data ─────────────────────────────────
 function getFiltered() {
   const kwLower = searchKw.toLowerCase();
   let result = QA_DATA.filter(d => {
-    const monthKey = `${d.year}_${String(d.month).padStart(2,'0')}`;
-    const monthOk  = activeMonth === null || monthKey === activeMonth;
-    const tagOk    = activeTag   === null || d.tag    === activeTag;
-    const kwOk     = !kwLower   || [d.question, d.answer, d.name, d.tag, d.monthLabel]
-                       .some(s => s.toLowerCase().includes(kwLower));
-    return monthOk && tagOk && kwOk;
+    const monthKey   = `${d.year}_${String(d.month).padStart(2,'0')}`;
+    const monthOk    = activeMonth   === null || monthKey === activeMonth;
+    const tagOk      = activeTag     === null || d.tag    === activeTag;
+    const personaOk  = activePersona === null || getPersonas(d).includes(activePersona);
+    const kwOk       = !kwLower || [d.question, d.answer, d.name, d.tag, d.monthLabel]
+                         .some(s => s.toLowerCase().includes(kwLower));
+    return monthOk && tagOk && personaOk && kwOk;
   });
   if (sortOrder === 'old') result = result.slice().reverse();
   return result;
@@ -713,7 +762,7 @@ function renderCards(data) {
 function renderStats(data) {
   const el    = document.getElementById('stats-count');
   const total = QA_DATA.length;
-  const hasFilter = activeTag !== null || activeMonth !== null || searchKw;
+  const hasFilter = activeTag !== null || activeMonth !== null || activePersona !== null || searchKw;
   if (!hasFilter) {
     el.innerHTML = `<strong>${total}</strong> 件`;
   } else {
@@ -722,7 +771,7 @@ function renderStats(data) {
     el.innerHTML = `<strong>${data.length}</strong> 件表示中${hint}（全 ${total} 件）`;
   }
   const clearBtn = document.getElementById('clear-btn');
-  if (activeTag !== null || activeMonth !== null) {
+  if (activeTag !== null || activeMonth !== null || activePersona !== null) {
     clearBtn.classList.add('visible');
   } else {
     clearBtn.classList.remove('visible');
@@ -731,8 +780,9 @@ function renderStats(data) {
 
 // ── Clear all filters ──────────────────────────────────
 function clearFilters() {
-  activeTag   = null;
-  activeMonth = null;
+  activeTag     = null;
+  activeMonth   = null;
+  activePersona = null;
   renderAll();
 }
 
