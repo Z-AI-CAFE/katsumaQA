@@ -599,16 +599,71 @@ const PERSONAS = [
                '利回り','NISA','iDeCo','資産形成','老後資金','年金','ドルコスト',
                'リバランス','金融資産','証券','インデックス'],
     subcategories: [
-      { id: 'investor_60plus', label: '60歳以上の資産形成',
+      { id: 'investor_retire', label: 'リタイア後',
         keywords: ['定年','リタイア','老後','60歳','65歳','70歳','シニア','退職金',
-                   'セカンドライフ','引退','リタイアメント','60代','70代','熟年'] },
+                   'セカンドライフ','引退','リタイアメント','60代','70代','熟年',
+                   'リタイアメントインカム','取り崩し','資産取崩し'] },
+      { id: 'investor_current', label: '現役世代',
+        keywords: ['積立投資を始め','今すぐ始め','ドルコスト平均法で積立',
+                   'コツコツ続け','資産形成を始め','投資を始め','積立を始め',
+                   '運用を始め','これから運用'] },
+      { id: 'investor_legacy', label: '贈与・相続',
+        keywords: ['贈与','相続','遺産','生前贈与','贈与税','相続税','遺言'] },
       // ↓ ここに次のサブカテゴリを追加してください
     ]
   },
 ];
 
+// 手動ペルソナ補正マップ（キー: videoId_qNum）
+// 自動分類を上書きします。[] = どのペルソナにも属さない
+const PERSONA_OVERRIDES = {
+  // 会社員に変更
+  'Hjkg4SjdpAA_14': ['employee'],  // 工事さん（処理速度低い）
+  'Pb_bE5BTGas_4':  ['employee'],  // ママさん（人材紹介業AI）
+  'am5GP0ISRJU_15': ['employee'],  // おにゃんこさん（夫転職・起業）
+  'sNxpJRqdmsY_5':  ['employee'],  // 富士さん（副業前提・雇用形態変更）
+  'Fijc_0APDE4_8':  ['employee'],  // 匿名（公立高校教員）
+  '4aV7fxH4A9g_4':  ['employee'],  // み大阪さん（30代・時短勤務）
+  'v0m3k1X8-3I_11': ['employee'],  // プチさん（公務員10年）
+  'afgysjdnV6A_8':  ['employee'],  // おかゆさん（やりたいことが見つからない）
+  'afgysjdnV6A_15': ['employee'],  // スズメさん（転職活動中）
+  'Pbi3h45cLsc_18': ['employee'],  // ママ営業あきちゃんさん（脱サラ希望）
+  'uAo_jg-O24c_10': ['employee'],  // まりさん（IT企業マーケ事務）
+  'uAo_jg-O24c_18': ['employee'],  // かよさん（公認会計士）
+  'ul35MFpIksc_3':  ['employee'],  // 松丸さん（コンサル復職）
+  'YB5nvrEENQI_7':  ['employee'],  // 子さん（会計士12年）
+  'YB5nvrEENQI_11': ['employee'],  // 投資家テットさん（ファンド社員）
+  'FCdAx5sQNp8_18': ['employee'],  // みこさん（管理職・4月退職計画）
+
+  // 主婦・育児中に変更
+  '4dundD3CHQM_15': ['parent'],    // まりさん（19歳息子・インフル予防接種）
+  'Pbi3h45cLsc_20': ['parent'],    // 自活等さん（美術系大学院生の子供）
+
+  // 個人事業主のみ（元：フリーランス / 投資・資産形成の重複を解消）
+  'v0m3k1X8-3I_15': ['freelance'], // アンディさん（希少な靴収集）
+  'D6oeLGstt7k_22': ['freelance'], // ひろさん（副業・投資ブログ）
+
+  // どのペルソナにも属さない（空白）
+  '4dundD3CHQM_17': [],  // エルフィーさん（夫のフキハラ）
+  'Fijc_0APDE4_9':  [],  // 島さん（家庭内別居・離婚）
+  'Fijc_0APDE4_12': [],  // プチさん（詐欺・フィッシング対策）
+  '4aV7fxH4A9g_19': [],  // コロンさん（自己決定できるようになった経緯）
+  'v0m3k1X8-3I_9':  [],  // 猫さん（食費15万円・フードファディズム）
+  'v0m3k1X8-3I_10': [],  // 花さん（91歳・85歳の両親支援）
+  'D6oeLGstt7k_1':  [],  // 小一さん（グルテンフリー・カゼインフリー）
+  'nf-NU3_x2Io_16': [],  // ボルボックスさん（高3の娘と夫が不仲）
+  'uAo_jg-O24c_3':  [],  // ベリーさん（古民家購入・改装）
+  'uAo_jg-O24c_5':  [],  // 宮さん（60歳フリーランス研究者・役職）
+  'uAo_jg-O24c_19': [],  // もちもちのきさん（理不尽な対応でフリーズ）
+  'ul35MFpIksc_2':  [],  // いしさん（MBA留学・独立開業）
+  'YB5nvrEENQI_24': [],  // リコさん（アラフォー起業家・婚活）
+  'biwr0ats-5Q_19': [],  // り子さん（物価高の生活者・事業者と話す際）
+};
+
 // Q&Aがどのペルソナに該当するかを返す
 function getPersonas(d) {
+  const key = d.videoId + '_' + d.qNum;
+  if (key in PERSONA_OVERRIDES) return PERSONA_OVERRIDES[key];
   const text = d.question + ' ' + d.answer + ' ' + (d.name || '');
   return PERSONAS.filter(p => p.keywords.some(k => text.includes(k))).map(p => p.id);
 }
