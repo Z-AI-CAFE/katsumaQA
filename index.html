@@ -3,42 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="google-site-verification" content="EFX4uiXwtIvpyaX8Uj4KLrOusUDXABKGcqgu_131XvU" />
-
-<!-- ▼ Google Analytics (GA4) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZVR5H4QS7V"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-ZVR5H4QS7V');
-</script>
-
-<!-- ▼ SEO: 基本メタタグ -->
-<title>勝間塾 公開質問ライブ Q&Aアーカイブ | 質問と回答まとめ</title>
-<meta name="description" content="勝間塾の公開質問ライブ（YouTube）に寄せられた質問と回答を、タグ・月別・キーワードで検索できるアーカイブサイトです。">
-<link rel="canonical" href="https://z-ai-cafe.github.io/katsumaQA/">
-
-<!-- ▼ SEO: OGP（SNSシェア・Googleプレビュー用） -->
-<meta property="og:type"        content="website">
-<meta property="og:url"         content="https://z-ai-cafe.github.io/katsumaQA/">
-<meta property="og:title"       content="勝間塾 公開質問ライブ Q&Aアーカイブ">
-<meta property="og:description" content="勝間塾の公開質問ライブで寄せられた質問と回答のアーカイブ。タグ・月別・キーワードで検索できます。">
-<meta property="og:locale"      content="ja_JP">
-<meta property="og:site_name"   content="勝間塾 Q&Aアーカイブ">
-<meta property="og:image"       content="https://z-ai-cafe.github.io/katsumaQA/ogp.png">
-<meta property="og:image:width"  content="1200">
-<meta property="og:image:height" content="630">
-
-<!-- ▼ SEO: Twitter Card -->
-<meta name="twitter:card"        content="summary_large_image">
-<meta name="twitter:title"       content="勝間塾 公開質問ライブ Q&Aアーカイブ">
-<meta name="twitter:description" content="勝間塾の公開質問ライブで寄せられた質問と回答のアーカイブ。タグ・月別・キーワードで検索できます。">
-<meta name="twitter:image"       content="https://z-ai-cafe.github.io/katsumaQA/ogp.png">
-
-<!-- ▼ SEO: JSON-LD構造化データ（build.jsが自動注入） -->
-<!-- JSON_LD_PLACEHOLDER -->
-
+<meta name="google-site-verification" content="bwprNJei8Qe0DdWz6Y43ZmAqxyAb4ZwP8kNQMvsjetY" />
+<title>勝間塾 公開質問ライブ Q&Aアーカイブ</title>
 <script src="data.js"></script>
 <style>
 /* ── Reset & Base ── */
@@ -67,6 +33,7 @@ body {
   line-height: 1.7;
   font-size: 15px;
 }
+
 /* ── Header ── */
 header {
   background: var(--surface);
@@ -92,6 +59,7 @@ header {
   color: var(--text-muted);
   margin-top: 2px;
 }
+
 /* ── Filters ── */
 .filter-bar {
   background: var(--surface);
@@ -146,6 +114,8 @@ header {
   color: var(--tag-active-text);
   border-color: var(--tag-active-bg);
 }
+
+/* ── Month "すべて" button ── */
 .month-btn {
   display: inline-block;
   padding: 4px 14px;
@@ -170,12 +140,51 @@ header {
   color: #fff;
   border-color: var(--accent);
 }
+
+/* ── Year select dropdowns ── */
+.year-select {
+  display: inline-block;
+  padding: 4px 28px 4px 12px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background-color: var(--tag-bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b6b6b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+  color: var(--text);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  transition: all 0.15s;
+  outline: none;
+}
+.year-select:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background-color: var(--accent-light);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+}
+.year-select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+.year-select.active {
+  background-color: var(--accent-light);
+  border-color: var(--accent);
+  color: var(--accent);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+}
+
 /* ── Main content ── */
 main {
   max-width: 960px;
   margin: 0 auto;
   padding: 20px 16px 60px;
 }
+
 /* ── Stats bar ── */
 .stats-bar {
   display: flex;
@@ -204,6 +213,7 @@ main {
 }
 .clear-btn:hover { text-decoration: underline; }
 .clear-btn:not(.visible) { visibility: hidden; }
+
 /* ── Cards ── */
 .qa-list {
   display: flex;
@@ -295,56 +305,33 @@ main {
 }
 .card-footer {
   margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px solid var(--border);
-}
-.yt-source {
-  font-size: 11px;
-  color: var(--text-muted);
-  margin-bottom: 8px;
-}
-.yt-source a {
-  color: var(--text-muted);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-.yt-source a:hover { color: var(--text); }
-.yt-actions {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
 }
-.yt-embed-btn {
+.yt-link {
   display: inline-flex;
   align-items: center;
   gap: 5px;
   font-size: 12.5px;
   color: var(--youtube);
+  text-decoration: none;
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 6px;
   border: 1.5px solid transparent;
-  background: none;
-  cursor: pointer;
-  font-family: inherit;
   transition: all 0.15s;
 }
-.yt-embed-btn:hover {
+.yt-link:hover {
   background: #fff1f1;
   border-color: #fca5a5;
 }
-.yt-embed-wrap {
-  margin-top: 10px;
-  border-radius: 8px;
-  overflow: hidden;
-  height: 160px;
-  scroll-margin-top: 160px; /* スティッキーバー分のオフセット */
+.yt-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
 }
-.yt-embed-wrap iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;
-}
+
 /* ── Empty state ── */
 .empty-state {
   text-align: center;
@@ -352,6 +339,7 @@ main {
   color: var(--text-muted);
 }
 .empty-state p { font-size: 15px; }
+
 /* ── Month group header ── */
 .month-group-header {
   font-size: 13px;
@@ -363,6 +351,7 @@ main {
   border-bottom: 1px solid var(--border);
   margin-bottom: 2px;
 }
+
 /* ── Search box ── */
 .search-row {
   display: flex;
@@ -401,6 +390,7 @@ main {
 }
 .search-clear:hover { color: var(--text); }
 .search-clear.visible { display: inline; }
+
 /* ── Sort buttons ── */
 .sort-group {
   display: inline-flex;
@@ -432,6 +422,7 @@ main {
   color: var(--accent);
   background: var(--accent-light);
 }
+
 /* ── Keyword highlight ── */
 mark {
   background: #fef08a;
@@ -439,6 +430,7 @@ mark {
   border-radius: 2px;
   padding: 0 1px;
 }
+
 /* ── Footer ── */
 footer {
   text-align: center;
@@ -448,6 +440,7 @@ footer {
   border-top: 1px solid var(--border);
   background: var(--surface);
 }
+
 /* ── Responsive ── */
 @media (max-width: 600px) {
   header { padding: 14px 16px 12px; }
@@ -470,7 +463,6 @@ footer {
 
 <div class="filter-bar">
   <div class="filter-inner">
-
     <!-- Search & Sort row -->
     <div class="filter-row search-row">
       <span class="filter-label">検索</span>
@@ -479,22 +471,19 @@ footer {
       <button class="search-clear" id="search-clear" onclick="clearSearch()">✕ クリア</button>
       <div class="sort-group" style="margin-left:auto;">
         <button class="sort-btn active" id="sort-new" onclick="setSort('new')">新しい順</button>
-        <button class="sort-btn"        id="sort-old" onclick="setSort('old')">古い順</button>
+        <button class="sort-btn" id="sort-old" onclick="setSort('old')">古い順</button>
       </div>
     </div>
-
     <!-- Month filter -->
     <div class="filter-row">
       <span class="filter-label">月</span>
-      <div id="month-filters"></div>
+      <div id="month-filters" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;"></div>
     </div>
-
     <!-- Tag filter -->
     <div class="filter-row">
       <span class="filter-label">タグ</span>
       <div id="tag-filters"></div>
     </div>
-
   </div>
 </div>
 
@@ -510,8 +499,7 @@ footer {
 </main>
 
 <footer>
-  <p>データ出典: <a href="https://www.youtube.com/channel/UCWoiNwdr7EEjgs2waxe_QpA" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;text-underline-offset:2px;">勝間和代が徹底的にマニアックな話をするYouTube</a>&nbsp;／&nbsp;最終更新: 2026年5月</p>
-  <p style="margin-top:6px;">このサイトは勝間塾の公開質問ライブのファンアーカイブです。動画・回答の著作権は勝間和代氏および勝間塾に帰属します。</p>
+  データ出典: 勝間塾 公開質問ライブ（YouTube）&nbsp;／&nbsp;最終更新: 2026年5月
 </footer>
 
 <script>
@@ -529,7 +517,7 @@ function getMonths() {
     if (!map.has(key)) map.set(key, d.monthLabel);
   });
   return [...map.entries()]
-    .sort((a, b) => b[0].localeCompare(a[0]))
+    .sort((a, b) => b[0].localeCompare(a[0])) // newest-first
     .map(([key, label]) => ({ key, label }));
 }
 
@@ -548,7 +536,6 @@ function onSearchInput(val) {
   clearBtn.classList.toggle('visible', searchKw.length > 0);
   renderAll();
 }
-
 function clearSearch() {
   searchKw = '';
   const input = document.getElementById('search-input');
@@ -559,23 +546,57 @@ function clearSearch() {
 
 // ── Render filter buttons ──────────────────────────────
 function renderFilters() {
-  // Month buttons
+  // ── Month filter: "すべて" ボタン + 年ごとのセレクトボックス ──
   const monthContainer = document.getElementById('month-filters');
   monthContainer.innerHTML = '';
+
+  // "すべて" ボタン
   const allMonthBtn = document.createElement('button');
   allMonthBtn.className = 'month-btn' + (activeMonth === null ? ' active' : '');
   allMonthBtn.textContent = 'すべて';
   allMonthBtn.onclick = () => { activeMonth = null; renderAll(); };
   monthContainer.appendChild(allMonthBtn);
+
+  // 年ごとにグループ化（新しい年順）
+  const yearMap = new Map();
   getMonths().forEach(({ key, label }) => {
-    const btn = document.createElement('button');
-    btn.className = 'month-btn' + (activeMonth === key ? ' active' : '');
-    btn.textContent = label;
-    btn.onclick = () => { activeMonth = key; renderAll(); };
-    monthContainer.appendChild(btn);
+    const year = key.split('_')[0];
+    if (!yearMap.has(year)) yearMap.set(year, []);
+    yearMap.get(year).push({ key, label });
   });
 
-  // Tag buttons
+  [...yearMap.entries()]
+    .sort((a, b) => Number(b[0]) - Number(a[0]))
+    .forEach(([year, months]) => {
+      const isActive = months.some(m => m.key === activeMonth);
+      const select = document.createElement('select');
+      select.className = 'year-select' + (isActive ? ' active' : '');
+
+      // デフォルト選択肢（年ラベル）
+      const defaultOpt = document.createElement('option');
+      defaultOpt.value = '';
+      defaultOpt.textContent = year + '年';
+      select.appendChild(defaultOpt);
+
+      // 月の選択肢
+      months.forEach(({ key, label }) => {
+        const opt = document.createElement('option');
+        opt.value = key;
+        // 年部分を除いて「5月」のみ表示
+        opt.textContent = label.replace(year + '年', '');
+        if (activeMonth === key) opt.selected = true;
+        select.appendChild(opt);
+      });
+
+      select.onchange = () => {
+        activeMonth = select.value || null;
+        renderAll();
+      };
+
+      monthContainer.appendChild(select);
+    });
+
+  // ── Tag buttons (変更なし) ──
   const tagContainer = document.getElementById('tag-filters');
   tagContainer.innerHTML = '';
   const allTagBtn = document.createElement('button');
@@ -598,8 +619,8 @@ function getFiltered() {
   let result = QA_DATA.filter(d => {
     const monthKey = `${d.year}_${String(d.month).padStart(2,'0')}`;
     const monthOk  = activeMonth === null || monthKey === activeMonth;
-    const tagOk    = activeTag   === null || d.tag === activeTag;
-    const kwOk     = !kwLower || [d.question, d.answer, d.name, d.tag, d.monthLabel]
+    const tagOk    = activeTag   === null || d.tag    === activeTag;
+    const kwOk     = !kwLower   || [d.question, d.answer, d.name, d.tag, d.monthLabel]
                        .some(s => s.toLowerCase().includes(kwLower));
     return monthOk && tagOk && kwOk;
   });
@@ -607,30 +628,9 @@ function getFiltered() {
   return result;
 }
 
-// ── YouTube 埋め込みトグル ──────────────────────────────
-function toggleEmbed(btn, videoId, seconds, timestamp) {
-  const wrap = btn.closest('.card-footer').querySelector('.yt-embed-wrap');
-  const isOpen = wrap.style.display !== 'none';
-  if (isOpen) {
-    wrap.style.display = 'none';
-    wrap.innerHTML = '';
-    btn.textContent = '▶ ' + timestamp + ' から再生';
-  } else {
-    wrap.innerHTML = '<iframe src="https://www.youtube.com/embed/'
-      + encodeURIComponent(videoId) + '?start=' + seconds + '&rel=0"'
-      + ' allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"'
-      + ' allowfullscreen loading="lazy"></iframe>';
-    wrap.style.display = 'block';
-    btn.textContent = '✕ 閉じる';
-    // 展開後、スティッキーバーに隠れないようスクロール調整
-    setTimeout(function() {
-      const rect = wrap.getBoundingClientRect();
-      const stickyH = 155; // header(~73px) + filter-bar(~82px)
-      if (rect.top < stickyH) {
-        window.scrollBy({ top: rect.top - stickyH - 8, behavior: 'smooth' });
-      }
-    }, 50);
-  }
+// ── YouTube URL ────────────────────────────────────────
+function ytUrl(videoId, seconds) {
+  return `https://www.youtube.com/watch?v=${videoId}&t=${seconds}s`;
 }
 
 // ── Escape HTML ────────────────────────────────────────
@@ -642,7 +642,7 @@ function escHtml(str) {
     .replace(/"/g,'&quot;');
 }
 
-// ── Highlight keyword ──────────────────────────────────
+// ── Highlight keyword in already-escaped HTML string ──
 function highlight(escapedStr) {
   if (!searchKw) return escapedStr;
   const escaped = escHtml(searchKw);
@@ -655,12 +655,10 @@ function renderCards(data) {
   const list  = document.getElementById('qa-list');
   const empty = document.getElementById('empty-state');
   list.innerHTML = '';
-  if (data.length === 0) {
-    empty.style.display = 'block';
-    return;
-  }
+  if (data.length === 0) { empty.style.display = 'block'; return; }
   empty.style.display = 'none';
 
+  // Group by monthLabel
   const groups = new Map();
   data.forEach(d => {
     if (!groups.has(d.monthLabel)) groups.set(d.monthLabel, []);
@@ -698,11 +696,12 @@ function renderCards(data) {
           <div class="a-text">${aHtml}</div>
         </div>
         <div class="card-footer">
-          <div class="yt-source">出典: <a href="https://www.youtube.com/channel/UCWoiNwdr7EEjgs2waxe_QpA" target="_blank" rel="noopener">勝間和代が徹底的にマニアックな話をするYouTube</a></div>
-          <div class="yt-actions">
-            <button class="yt-embed-btn" onclick="toggleEmbed(this,'${d.videoId}',${d.seconds},'${escHtml(d.timestamp)}')">▶ ${escHtml(d.timestamp)} から再生</button>
-          </div>
-          <div class="yt-embed-wrap" style="display:none;"></div>
+          <a class="yt-link" href="${ytUrl(d.videoId, d.seconds)}" target="_blank" rel="noopener">
+            <svg class="yt-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1C4.5 20.4 12 20.4 12 20.4s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/>
+            </svg>
+            ${escHtml(d.timestamp)} から見る
+          </a>
         </div>
       `;
       list.appendChild(card);
@@ -748,6 +747,5 @@ function renderAll() {
 // ── Init ───────────────────────────────────────────────
 renderAll();
 </script>
-
 </body>
 </html>
