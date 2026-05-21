@@ -10,7 +10,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-P6CR7VBZVD');
 </script>
 <title>勝間塾 公開質問ライブ Q&Aアーカイブ</title>
@@ -31,6 +30,8 @@
   --tag-active-bg: #2563eb;
   --tag-active-text: #ffffff;
   --youtube: #dc2626;
+  --worry: #059669;
+  --worry-light: #d1fae5;
   --radius: 10px;
   --shadow: 0 1px 4px rgba(0,0,0,0.07), 0 2px 8px rgba(0,0,0,0.04);
 }
@@ -144,6 +145,65 @@ header {
   background: var(--accent);
   color: #fff;
   border-color: var(--accent);
+}
+/* ── Worry filter section ── */
+.worry-section {
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  margin-top: 6px;
+}
+.worry-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--worry);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 7px;
+}
+.worry-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+.worry-group:last-child { margin-bottom: 0; }
+.worry-main-label {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text);
+  white-space: nowrap;
+  padding: 3px 0;
+  min-width: fit-content;
+}
+.worry-sep {
+  font-size: 11px;
+  color: var(--border);
+  margin: 0 2px;
+}
+.worry-btn {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1.5px solid #a7f3d0;
+  background: #f0fdf4;
+  color: #065f46;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  font-family: inherit;
+}
+.worry-btn:hover {
+  border-color: var(--worry);
+  background: var(--worry-light);
+  color: var(--worry);
+}
+.worry-btn.active {
+  background: var(--worry);
+  color: #fff;
+  border-color: var(--worry);
 }
 /* ── Main content ── */
 main {
@@ -407,6 +467,7 @@ footer {
   .qa-card { padding: 14px 15px 12px; }
   .tag-badge { margin-left: 0; margin-top: 2px; }
   .search-input { max-width: 100%; }
+  .worry-main-label { font-size: 11px; }
 }
 </style>
 </head>
@@ -440,6 +501,22 @@ footer {
       <span class="filter-label">タグ</span>
       <div id="tag-filters"></div>
     </div>
+    <!-- Worry filter -->
+    <div class="worry-section">
+      <div class="worry-section-title">悩み別から調べる</div>
+      <div class="worry-group">
+        <span class="worry-main-label">会社員</span>
+        <span class="worry-sep">›</span>
+        <button class="worry-btn" data-worry="会社員/転職の悩み" onclick="setWorry(this)">転職の悩み</button>
+        <button class="worry-btn" data-worry="会社員/評価・昇進" onclick="setWorry(this)">評価・昇進</button>
+      </div>
+      <div class="worry-group">
+        <span class="worry-main-label">個人事業主・フリーランス</span>
+        <span class="worry-sep">›</span>
+        <button class="worry-btn" data-worry="個人事業主・フリーランス/独立・起業したい" onclick="setWorry(this)">独立・起業したい</button>
+        <button class="worry-btn" data-worry="個人事業主・フリーランス/価格設定" onclick="setWorry(this)">価格設定</button>
+      </div>
+    </div>
   </div>
 </div>
 <main>
@@ -457,10 +534,11 @@ footer {
 </footer>
 <script>
 // ── State ──────────────────────────────────────────────
-let activeTag = null;
+let activeTag   = null;
 let activeMonth = null;
-let searchKw = '';
-let sortOrder = 'new'; // 'new' | 'old'
+let activeWorry = null; // e.g. "会社員/転職の悩み"
+let searchKw    = '';
+let sortOrder   = 'new'; // 'new' | 'old'
 
 // ── Build month list from data ──────────────────────────
 function getMonths() {
@@ -470,7 +548,7 @@ function getMonths() {
     if (!map.has(key)) map.set(key, d.monthLabel);
   });
   return [...map.entries()]
-    .sort((a, b) => b[0].localeCompare(a[0])) // always newest-first in filter buttons
+    .sort((a, b) => b[0].localeCompare(a[0]))
     .map(([key, label]) => ({ key, label }));
 }
 
@@ -485,16 +563,27 @@ function setSort(order) {
 // ── Search input handler ───────────────────────────────
 function onSearchInput(val) {
   searchKw = val.trim();
-  const clearBtn = document.getElementById('search-clear');
-  clearBtn.classList.toggle('visible', searchKw.length > 0);
+  document.getElementById('search-clear').classList.toggle('visible', searchKw.length > 0);
   renderAll();
 }
 function clearSearch() {
   searchKw = '';
-  const input = document.getElementById('search-input');
-  input.value = '';
+  document.getElementById('search-input').value = '';
   document.getElementById('search-clear').classList.remove('visible');
   renderAll();
+}
+
+// ── Worry filter ───────────────────────────────────────
+function setWorry(btn) {
+  const key = btn.dataset.worry;
+  activeWorry = (activeWorry === key) ? null : key; // toggle
+  renderAll();
+}
+
+function renderWorryButtons() {
+  document.querySelectorAll('.worry-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.worry === activeWorry);
+  });
 }
 
 // ── Render filter buttons ──────────────────────────────
@@ -530,6 +619,9 @@ function renderFilters() {
     btn.onclick = () => { activeTag = tag; renderAll(); };
     tagContainer.appendChild(btn);
   });
+
+  // Worry buttons (static HTML, just sync active state)
+  renderWorryButtons();
 }
 
 // ── Filter & sort data ─────────────────────────────────
@@ -537,13 +629,13 @@ function getFiltered() {
   const kwLower = searchKw.toLowerCase();
   let result = QA_DATA.filter(d => {
     const monthKey = `${d.year}_${String(d.month).padStart(2,'0')}`;
-    const monthOk = activeMonth === null || monthKey === activeMonth;
-    const tagOk   = activeTag === null || d.tag === activeTag;
-    const kwOk    = !kwLower || [d.question, d.answer, d.name, d.tag, d.monthLabel]
-                      .some(s => s.toLowerCase().includes(kwLower));
-    return monthOk && tagOk && kwOk;
+    const monthOk  = activeMonth === null || monthKey === activeMonth;
+    const tagOk    = activeTag === null || d.tag === activeTag;
+    const worryOk  = activeWorry === null || (d.worries && d.worries.includes(activeWorry));
+    const kwOk     = !kwLower || [d.question, d.answer, d.name, d.tag, d.monthLabel]
+                       .some(s => s.toLowerCase().includes(kwLower));
+    return monthOk && tagOk && worryOk && kwOk;
   });
-  // Sort: QA_DATA is stored newest-first; reverse for oldest-first
   if (sortOrder === 'old') result = result.slice().reverse();
   return result;
 }
@@ -562,7 +654,7 @@ function escHtml(str) {
     .replace(/"/g,'&quot;');
 }
 
-// ── Highlight keyword in already-escaped HTML string ──
+// ── Highlight keyword ──────────────────────────────────
 function highlight(escapedStr) {
   if (!searchKw) return escapedStr;
   const escaped = escHtml(searchKw);
@@ -581,14 +673,13 @@ function renderCards(data) {
   }
   empty.style.display = 'none';
 
-  // Group by monthLabel (preserving sort order)
   const groups = new Map();
   data.forEach(d => {
     if (!groups.has(d.monthLabel)) groups.set(d.monthLabel, []);
     groups.get(d.monthLabel).push(d);
   });
 
-  const showGroupHeaders = activeMonth === null && !searchKw && getMonths().length > 1;
+  const showGroupHeaders = activeMonth === null && activeWorry === null && !searchKw && getMonths().length > 1;
 
   groups.forEach((items, monthLabel) => {
     if (showGroupHeaders) {
@@ -634,28 +725,29 @@ function renderCards(data) {
 
 // ── Stats & clear button ───────────────────────────────
 function renderStats(data) {
-  const el = document.getElementById('stats-count');
+  const el    = document.getElementById('stats-count');
   const total = QA_DATA.length;
-  const hasFilter = activeTag !== null || activeMonth !== null || searchKw;
+  const hasFilter = activeTag !== null || activeMonth !== null || activeWorry !== null || searchKw;
   if (!hasFilter) {
     el.innerHTML = `<strong>${total}</strong> 件`;
   } else {
     let hint = '';
-    if (searchKw) hint += `「${escHtml(searchKw)}」`;
+    if (activeWorry) hint += `「${escHtml(activeWorry.split('/')[1])}」`;
+    if (searchKw)    hint += `「${escHtml(searchKw)}」`;
     el.innerHTML = `<strong>${data.length}</strong> 件表示中${hint}（全 ${total} 件）`;
   }
   const clearBtn = document.getElementById('clear-btn');
-  if (activeTag !== null || activeMonth !== null) {
-    clearBtn.classList.add('visible');
-  } else {
-    clearBtn.classList.remove('visible');
-  }
+  clearBtn.classList.toggle('visible', hasFilter);
 }
 
 // ── Clear all filters ──────────────────────────────────
 function clearFilters() {
   activeTag   = null;
   activeMonth = null;
+  activeWorry = null;
+  searchKw    = '';
+  document.getElementById('search-input').value = '';
+  document.getElementById('search-clear').classList.remove('visible');
   renderAll();
 }
 
