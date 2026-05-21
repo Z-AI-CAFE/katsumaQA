@@ -372,16 +372,24 @@ footer {
     <!-- 悩みパネル -->
     <div class="filter-panel" id="panel-worry">
       <div class="worry-group">
+        <span class="worry-main-label">個人事業主・フリーランス</span>
+        <span class="worry-sep">›</span>
+        <button class="worry-btn" data-worry="個人事業主・フリーランス/集客の悩み" onclick="setWorry(this)">集客の悩み</button>
+        <button class="worry-btn" data-worry="個人事業主・フリーランス/価格設定" onclick="setWorry(this)">価格設定</button>
+      </div>
+      <div class="worry-group">
         <span class="worry-main-label">会社員</span>
         <span class="worry-sep">›</span>
+        <button class="worry-btn" data-worry="会社員/独立・起業したい" onclick="setWorry(this)">独立・起業したい</button>
         <button class="worry-btn" data-worry="会社員/転職の悩み" onclick="setWorry(this)">転職の悩み</button>
         <button class="worry-btn" data-worry="会社員/評価・昇進" onclick="setWorry(this)">評価・昇進</button>
       </div>
       <div class="worry-group">
-        <span class="worry-main-label">個人事業主・フリーランス</span>
+        <span class="worry-main-label">投資・資産運用</span>
         <span class="worry-sep">›</span>
-        <button class="worry-btn" data-worry="個人事業主・フリーランス/独立・起業したい" onclick="setWorry(this)">独立・起業したい</button>
-        <button class="worry-btn" data-worry="個人事業主・フリーランス/価格設定" onclick="setWorry(this)">価格設定</button>
+        <button class="worry-btn" data-worry="投資・資産運用/リタイア後" onclick="setWorry(this)">リタイア後</button>
+        <button class="worry-btn" data-worry="投資・資産運用/現役世代" onclick="setWorry(this)">現役世代</button>
+        <button class="worry-btn" data-worry="投資・資産運用/贈与・相続" onclick="setWorry(this)">贈与・相続</button>
       </div>
     </div>
 
