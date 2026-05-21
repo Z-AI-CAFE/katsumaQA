@@ -27,8 +27,6 @@
   --accent: #2563eb;
   --accent-light: #dbeafe;
   --tag-bg: #f0f0eb;
-  --tag-active-bg: #2563eb;
-  --tag-active-text: #ffffff;
   --youtube: #dc2626;
   --worry: #059669;
   --worry-light: #d1fae5;
@@ -43,6 +41,7 @@ body {
   line-height: 1.7;
   font-size: 15px;
 }
+
 /* ── Header ── */
 header {
   background: var(--surface);
@@ -53,333 +52,28 @@ header {
   z-index: 100;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
-.header-inner {
-  max-width: 960px;
-  margin: 0 auto;
-}
-.site-title {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--text);
-  letter-spacing: -0.01em;
-}
-.site-subtitle {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 2px;
-}
-/* ── Filters ── */
+.header-inner { max-width: 960px; margin: 0 auto; }
+.site-title { font-size: 17px; font-weight: 700; color: var(--text); letter-spacing: -0.01em; }
+.site-subtitle { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+/* ── Filter bar ── */
 .filter-bar {
   background: var(--surface);
   border-bottom: 1px solid var(--border);
-  padding: 12px 24px;
+  padding: 10px 24px;
   position: sticky;
   top: 73px;
   z-index: 99;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.04);
 }
-.filter-inner {
-  max-width: 960px;
-  margin: 0 auto;
-}
-.filter-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 8px;
-}
-.filter-row:last-child { margin-bottom: 0; }
-.filter-label {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-  min-width: 36px;
-}
-.tag-btn {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  border: 1.5px solid var(--border);
-  background: var(--tag-bg);
-  color: var(--text);
-  font-size: 12.5px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
-  font-family: inherit;
-}
-.tag-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-light);
-}
-.tag-btn.active {
-  background: var(--tag-active-bg);
-  color: var(--tag-active-text);
-  border-color: var(--tag-active-bg);
-}
-.month-btn {
-  display: inline-block;
-  padding: 4px 14px;
-  border-radius: 20px;
-  border: 1.5px solid var(--border);
-  background: var(--tag-bg);
-  color: var(--text);
-  font-size: 12.5px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
-  font-family: inherit;
-}
-.month-btn:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  background: var(--accent-light);
-}
-.month-btn.active {
-  background: var(--accent);
-  color: #fff;
-  border-color: var(--accent);
-}
-/* ── Worry filter section ── */
-.worry-section {
-  border-top: 1px solid var(--border);
-  padding-top: 10px;
-  margin-top: 6px;
-}
-.worry-section-title {
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--worry);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 7px;
-}
-.worry-group {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-bottom: 6px;
-}
-.worry-group:last-child { margin-bottom: 0; }
-.worry-main-label {
-  font-size: 11.5px;
-  font-weight: 700;
-  color: var(--text);
-  white-space: nowrap;
-  padding: 3px 0;
-  min-width: fit-content;
-}
-.worry-sep {
-  font-size: 11px;
-  color: var(--border);
-  margin: 0 2px;
-}
-.worry-btn {
-  display: inline-block;
-  padding: 4px 12px;
-  border-radius: 20px;
-  border: 1.5px solid #a7f3d0;
-  background: #f0fdf4;
-  color: #065f46;
-  font-size: 12.5px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.15s;
-  white-space: nowrap;
-  font-family: inherit;
-}
-.worry-btn:hover {
-  border-color: var(--worry);
-  background: var(--worry-light);
-  color: var(--worry);
-}
-.worry-btn.active {
-  background: var(--worry);
-  color: #fff;
-  border-color: var(--worry);
-}
-/* ── Main content ── */
-main {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 20px 16px 60px;
-}
-/* ── Stats bar ── */
-.stats-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-  padding: 0 2px;
-}
-.stats-count {
-  font-size: 13px;
-  color: var(--text-muted);
-}
-.stats-count strong {
-  color: var(--text);
-  font-weight: 600;
-}
-.clear-btn {
-  font-size: 12px;
-  color: var(--accent);
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: inherit;
-  padding: 2px 4px;
-  border-radius: 4px;
-}
-.clear-btn:hover { text-decoration: underline; }
-.clear-btn:not(.visible) { visibility: hidden; }
-/* ── Cards ── */
-.qa-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-.qa-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 18px 20px 16px;
-  box-shadow: var(--shadow);
-  transition: box-shadow 0.15s, border-color 0.15s;
-}
-.qa-card:hover {
-  box-shadow: 0 2px 12px rgba(0,0,0,0.10);
-  border-color: #d0d0cc;
-}
-.card-meta {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
-  flex-wrap: wrap;
-}
-.q-num {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--text-muted);
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  padding: 1px 7px;
-  letter-spacing: 0.02em;
-}
-.month-badge {
-  font-size: 11.5px;
-  color: var(--text-muted);
-  font-weight: 500;
-}
-.name-badge {
-  font-size: 12px;
-  color: var(--text-muted);
-}
-.tag-badge {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 9px;
-  border-radius: 12px;
-  background: var(--accent-light);
-  color: var(--accent);
-  letter-spacing: 0.02em;
-  margin-left: auto;
-}
-.q-section {
-  margin-bottom: 8px;
-}
-.q-label {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 3px;
-}
-.q-text {
-  font-size: 14px;
-  line-height: 1.65;
-  color: var(--text);
-}
-.a-section {
-  margin-top: 10px;
-  padding-top: 10px;
-  border-top: 1px solid var(--border);
-}
-.a-label {
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--text-muted);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: 3px;
-}
-.a-text {
-  font-size: 13.5px;
-  line-height: 1.65;
-  color: #3a3a3a;
-}
-.card-footer {
-  margin-top: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-.yt-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  font-size: 12.5px;
-  color: var(--youtube);
-  text-decoration: none;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 6px;
-  border: 1.5px solid transparent;
-  transition: all 0.15s;
-}
-.yt-link:hover {
-  background: #fff1f1;
-  border-color: #fca5a5;
-}
-.yt-icon {
-  width: 16px;
-  height: 16px;
-  flex-shrink: 0;
-}
-/* ── Empty state ── */
-.empty-state {
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--text-muted);
-}
-.empty-state p { font-size: 15px; }
-/* ── Month group header ── */
-.month-group-header {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-muted);
-  letter-spacing: 0.04em;
-  padding: 4px 2px 8px;
-  margin-top: 8px;
-  border-bottom: 1px solid var(--border);
-  margin-bottom: 2px;
-}
-/* ── Search box ── */
+.filter-inner { max-width: 960px; margin: 0 auto; }
+
+/* ── Search row ── */
 .search-row {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 .search-input {
   flex: 1;
@@ -401,73 +95,236 @@ main {
 }
 .search-input::placeholder { color: #aaa; }
 .search-clear {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 13px;
-  color: var(--text-muted);
-  padding: 0 4px;
-  display: none;
-  font-family: inherit;
+  background: none; border: none; cursor: pointer;
+  font-size: 13px; color: var(--text-muted); padding: 0 4px;
+  display: none; font-family: inherit;
 }
 .search-clear:hover { color: var(--text); }
 .search-clear.visible { display: inline; }
-/* ── Sort buttons ── */
 .sort-group {
   display: inline-flex;
   border: 1.5px solid var(--border);
   border-radius: 20px;
   overflow: hidden;
   background: var(--tag-bg);
+  margin-left: auto;
 }
 .sort-btn {
-  padding: 4px 13px;
-  border: none;
-  background: transparent;
-  font-size: 12.5px;
-  font-weight: 500;
+  padding: 4px 13px; border: none; background: transparent;
+  font-size: 12.5px; font-weight: 500; color: var(--text-muted);
+  cursor: pointer; font-family: inherit; transition: all 0.15s; white-space: nowrap;
+}
+.sort-btn:not(:last-child) { border-right: 1.5px solid var(--border); }
+.sort-btn.active { background: var(--accent); color: #fff; }
+.sort-btn:not(.active):hover { color: var(--accent); background: var(--accent-light); }
+
+/* ── Section toggle buttons ── */
+.section-toggles {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.section-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--tag-bg);
   color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
   font-family: inherit;
   transition: all 0.15s;
-  white-space: nowrap;
+  position: relative;
 }
-.sort-btn:not(:last-child) {
-  border-right: 1.5px solid var(--border);
+.section-toggle:hover {
+  border-color: var(--text-muted);
+  color: var(--text);
 }
-.sort-btn.active {
-  background: var(--accent);
-  color: #fff;
-}
-.sort-btn:not(.active):hover {
+.section-toggle.open {
+  border-color: var(--accent);
   color: var(--accent);
   background: var(--accent-light);
 }
-/* ── Keyword highlight ── */
-mark {
-  background: #fef08a;
-  color: inherit;
-  border-radius: 2px;
-  padding: 0 1px;
+.section-toggle.has-active {
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 700;
 }
+.section-toggle.open.has-active {
+  background: var(--accent-light);
+}
+/* worry section toggle colour */
+.section-toggle.worry-toggle.open,
+.section-toggle.worry-toggle.has-active {
+  border-color: var(--worry);
+  color: var(--worry);
+  background: var(--worry-light);
+}
+.toggle-chevron {
+  font-size: 10px;
+  transition: transform 0.2s;
+  display: inline-block;
+}
+.section-toggle.open .toggle-chevron { transform: rotate(180deg); }
+
+/* active dot indicator */
+.active-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: none;
+  flex-shrink: 0;
+}
+.section-toggle.has-active .active-dot { display: inline-block; }
+.worry-toggle .active-dot { background: var(--worry); }
+
+/* ── Expandable panels ── */
+.filter-panel {
+  display: none;
+  padding: 10px 0 4px;
+  border-top: 1px solid var(--border);
+  margin-top: 10px;
+  animation: slideDown 0.15s ease;
+}
+.filter-panel.open { display: block; }
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Month buttons ── */
+.month-btn {
+  display: inline-block; padding: 4px 14px; border-radius: 20px;
+  border: 1.5px solid var(--border); background: var(--tag-bg);
+  color: var(--text); font-size: 12.5px; font-weight: 500;
+  cursor: pointer; transition: all 0.15s; white-space: nowrap; font-family: inherit;
+  margin: 2px 3px 2px 0;
+}
+.month-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+.month-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* ── Tag buttons ── */
+.tag-btn {
+  display: inline-block; padding: 4px 12px; border-radius: 20px;
+  border: 1.5px solid var(--border); background: var(--tag-bg);
+  color: var(--text); font-size: 12.5px; font-weight: 500;
+  cursor: pointer; transition: all 0.15s; white-space: nowrap; font-family: inherit;
+  margin: 2px 3px 2px 0;
+}
+.tag-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); }
+.tag-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+/* ── Worry buttons ── */
+.worry-group {
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px;
+}
+.worry-group:last-child { margin-bottom: 0; }
+.worry-main-label {
+  font-size: 12px; font-weight: 700; color: var(--text);
+  white-space: nowrap; min-width: fit-content;
+}
+.worry-sep { font-size: 11px; color: var(--border); }
+.worry-btn {
+  display: inline-block; padding: 4px 12px; border-radius: 20px;
+  border: 1.5px solid #a7f3d0; background: #f0fdf4; color: #065f46;
+  font-size: 12.5px; font-weight: 500; cursor: pointer;
+  transition: all 0.15s; white-space: nowrap; font-family: inherit;
+}
+.worry-btn:hover { border-color: var(--worry); background: var(--worry-light); color: var(--worry); }
+.worry-btn.active { background: var(--worry); color: #fff; border-color: var(--worry); }
+
+/* ── Main content ── */
+main { max-width: 960px; margin: 0 auto; padding: 20px 16px 60px; }
+
+/* ── Stats bar ── */
+.stats-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px; padding: 0 2px;
+}
+.stats-count { font-size: 13px; color: var(--text-muted); }
+.stats-count strong { color: var(--text); font-weight: 600; }
+.clear-btn {
+  font-size: 12px; color: var(--accent); background: none; border: none;
+  cursor: pointer; font-family: inherit; padding: 2px 4px; border-radius: 4px;
+}
+.clear-btn:hover { text-decoration: underline; }
+.clear-btn:not(.visible) { visibility: hidden; }
+
+/* ── Cards ── */
+.qa-list { display: flex; flex-direction: column; gap: 12px; }
+.qa-card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px 20px 16px;
+  box-shadow: var(--shadow); transition: box-shadow 0.15s, border-color 0.15s;
+}
+.qa-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.10); border-color: #d0d0cc; }
+.card-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.q-num {
+  font-size: 12px; font-weight: 700; color: var(--text-muted);
+  background: var(--surface2); border: 1px solid var(--border);
+  border-radius: 5px; padding: 1px 7px; letter-spacing: 0.02em;
+}
+.month-badge { font-size: 11.5px; color: var(--text-muted); font-weight: 500; }
+.name-badge  { font-size: 12px; color: var(--text-muted); }
+.tag-badge {
+  display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 9px;
+  border-radius: 12px; background: var(--accent-light); color: var(--accent);
+  letter-spacing: 0.02em; margin-left: auto;
+}
+.q-section { margin-bottom: 8px; }
+.q-label {
+  font-size: 11px; font-weight: 700; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px;
+}
+.q-text  { font-size: 14px; line-height: 1.65; color: var(--text); }
+.a-section { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
+.a-label {
+  font-size: 11px; font-weight: 700; color: var(--text-muted);
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px;
+}
+.a-text { font-size: 13.5px; line-height: 1.65; color: #3a3a3a; }
+.card-footer { margin-top: 12px; display: flex; align-items: center; justify-content: flex-end; }
+.yt-link {
+  display: inline-flex; align-items: center; gap: 5px; font-size: 12.5px;
+  color: var(--youtube); text-decoration: none; font-weight: 600;
+  padding: 4px 10px; border-radius: 6px; border: 1.5px solid transparent; transition: all 0.15s;
+}
+.yt-link:hover { background: #fff1f1; border-color: #fca5a5; }
+.yt-icon { width: 16px; height: 16px; flex-shrink: 0; }
+
+/* ── Empty state ── */
+.empty-state { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+.empty-state p { font-size: 15px; }
+
+/* ── Month group header ── */
+.month-group-header {
+  font-size: 13px; font-weight: 700; color: var(--text-muted);
+  letter-spacing: 0.04em; padding: 4px 2px 8px; margin-top: 8px;
+  border-bottom: 1px solid var(--border); margin-bottom: 2px;
+}
+
+/* ── Keyword highlight ── */
+mark { background: #fef08a; color: inherit; border-radius: 2px; padding: 0 1px; }
+
 /* ── Footer ── */
 footer {
-  text-align: center;
-  padding: 24px 16px;
-  font-size: 12px;
-  color: var(--text-muted);
-  border-top: 1px solid var(--border);
-  background: var(--surface);
+  text-align: center; padding: 24px 16px; font-size: 12px;
+  color: var(--text-muted); border-top: 1px solid var(--border); background: var(--surface);
 }
+
 /* ── Responsive ── */
 @media (max-width: 600px) {
   header { padding: 14px 16px 12px; }
-  .filter-bar { padding: 10px 16px; top: 64px; }
+  .filter-bar { padding: 8px 16px; top: 64px; }
   .site-title { font-size: 15px; }
   .qa-card { padding: 14px 15px 12px; }
   .tag-badge { margin-left: 0; margin-top: 2px; }
   .search-input { max-width: 100%; }
-  .worry-main-label { font-size: 11px; }
+  .section-toggle { font-size: 12px; padding: 5px 11px; }
 }
 </style>
 </head>
@@ -478,32 +335,42 @@ footer {
     <div class="site-subtitle">公開ライブでの質問と回答の要約・タイムスタンプ付きアーカイブ</div>
   </div>
 </header>
+
 <div class="filter-bar">
   <div class="filter-inner">
-    <!-- Search & Sort row -->
-    <div class="filter-row search-row">
-      <span class="filter-label">検索</span>
+
+    <!-- 検索 & ソート -->
+    <div class="search-row">
       <input type="search" class="search-input" id="search-input"
              placeholder="キーワードで絞り込む…" oninput="onSearchInput(this.value)">
       <button class="search-clear" id="search-clear" onclick="clearSearch()">✕ クリア</button>
-      <div class="sort-group" style="margin-left:auto;">
+      <div class="sort-group">
         <button class="sort-btn active" id="sort-new" onclick="setSort('new')">新しい順</button>
         <button class="sort-btn" id="sort-old" onclick="setSort('old')">古い順</button>
       </div>
     </div>
-    <!-- Month filter -->
-    <div class="filter-row">
-      <span class="filter-label">月</span>
-      <div id="month-filters"></div>
+
+    <!-- セクション切り替えボタン -->
+    <div class="section-toggles">
+      <button class="section-toggle worry-toggle" id="toggle-worry" onclick="togglePanel('worry')">
+        <span class="active-dot"></span>
+        悩みから調べる
+        <span class="toggle-chevron">▾</span>
+      </button>
+      <button class="section-toggle" id="toggle-month" onclick="togglePanel('month')">
+        <span class="active-dot"></span>
+        公開日から調べる
+        <span class="toggle-chevron">▾</span>
+      </button>
+      <button class="section-toggle" id="toggle-tag" onclick="togglePanel('tag')">
+        <span class="active-dot"></span>
+        タグから調べる
+        <span class="toggle-chevron">▾</span>
+      </button>
     </div>
-    <!-- Tag filter -->
-    <div class="filter-row">
-      <span class="filter-label">タグ</span>
-      <div id="tag-filters"></div>
-    </div>
-    <!-- Worry filter -->
-    <div class="worry-section">
-      <div class="worry-section-title">悩み別から調べる</div>
+
+    <!-- 悩みパネル -->
+    <div class="filter-panel" id="panel-worry">
       <div class="worry-group">
         <span class="worry-main-label">会社員</span>
         <span class="worry-sep">›</span>
@@ -517,8 +384,20 @@ footer {
         <button class="worry-btn" data-worry="個人事業主・フリーランス/価格設定" onclick="setWorry(this)">価格設定</button>
       </div>
     </div>
+
+    <!-- 公開日パネル -->
+    <div class="filter-panel" id="panel-month">
+      <div id="month-filters"></div>
+    </div>
+
+    <!-- タグパネル -->
+    <div class="filter-panel" id="panel-tag">
+      <div id="tag-filters"></div>
+    </div>
+
   </div>
 </div>
+
 <main>
   <div class="stats-bar">
     <div class="stats-count" id="stats-count"></div>
@@ -529,30 +408,43 @@ footer {
     <p>該当するQ&Aが見つかりませんでした。</p>
   </div>
 </main>
+
 <footer>
   データ出典: 勝間塾 公開質問ライブ（YouTube）&nbsp;／&nbsp;最終更新: 2026年5月
 </footer>
+
 <script>
 // ── State ──────────────────────────────────────────────
 let activeTag   = null;
 let activeMonth = null;
-let activeWorry = null; // e.g. "会社員/転職の悩み"
+let activeWorry = null;
 let searchKw    = '';
-let sortOrder   = 'new'; // 'new' | 'old'
+let sortOrder   = 'new';
+const openPanels = new Set(); // 開いているパネルID
 
-// ── Build month list from data ──────────────────────────
-function getMonths() {
-  const map = new Map();
-  QA_DATA.forEach(d => {
-    const key = `${d.year}_${String(d.month).padStart(2,'0')}`;
-    if (!map.has(key)) map.set(key, d.monthLabel);
-  });
-  return [...map.entries()]
-    .sort((a, b) => b[0].localeCompare(a[0]))
-    .map(([key, label]) => ({ key, label }));
+// ── Panel toggle ───────────────────────────────────────
+function togglePanel(name) {
+  const panel  = document.getElementById('panel-' + name);
+  const toggle = document.getElementById('toggle-' + name);
+  if (openPanels.has(name)) {
+    openPanels.delete(name);
+    panel.classList.remove('open');
+    toggle.classList.remove('open');
+  } else {
+    openPanels.add(name);
+    panel.classList.add('open');
+    toggle.classList.add('open');
+  }
 }
 
-// ── Sort toggle ────────────────────────────────────────
+// ── Worry filter ───────────────────────────────────────
+function setWorry(btn) {
+  const key = btn.dataset.worry;
+  activeWorry = (activeWorry === key) ? null : key;
+  renderAll();
+}
+
+// ── Sort ───────────────────────────────────────────────
 function setSort(order) {
   sortOrder = order;
   document.getElementById('sort-new').classList.toggle('active', order === 'new');
@@ -560,7 +452,7 @@ function setSort(order) {
   renderAll();
 }
 
-// ── Search input handler ───────────────────────────────
+// ── Search ─────────────────────────────────────────────
 function onSearchInput(val) {
   searchKw = val.trim();
   document.getElementById('search-clear').classList.toggle('visible', searchKw.length > 0);
@@ -573,64 +465,70 @@ function clearSearch() {
   renderAll();
 }
 
-// ── Worry filter ───────────────────────────────────────
-function setWorry(btn) {
-  const key = btn.dataset.worry;
-  activeWorry = (activeWorry === key) ? null : key; // toggle
-  renderAll();
+// ── Month list ─────────────────────────────────────────
+function getMonths() {
+  const map = new Map();
+  QA_DATA.forEach(d => {
+    const key = `${d.year}_${String(d.month).padStart(2,'0')}`;
+    if (!map.has(key)) map.set(key, d.monthLabel);
+  });
+  return [...map.entries()]
+    .sort((a, b) => b[0].localeCompare(a[0]))
+    .map(([key, label]) => ({ key, label }));
 }
 
-function renderWorryButtons() {
+// ── Render filters ─────────────────────────────────────
+function renderFilters() {
+  // --- Month ---
+  const mc = document.getElementById('month-filters');
+  mc.innerHTML = '';
+  const allM = document.createElement('button');
+  allM.className = 'month-btn' + (activeMonth === null ? ' active' : '');
+  allM.textContent = 'すべて';
+  allM.onclick = () => { activeMonth = null; renderAll(); };
+  mc.appendChild(allM);
+  getMonths().forEach(({ key, label }) => {
+    const b = document.createElement('button');
+    b.className = 'month-btn' + (activeMonth === key ? ' active' : '');
+    b.textContent = label;
+    b.onclick = () => { activeMonth = key; renderAll(); };
+    mc.appendChild(b);
+  });
+
+  // --- Tag ---
+  const tc = document.getElementById('tag-filters');
+  tc.innerHTML = '';
+  const allT = document.createElement('button');
+  allT.className = 'tag-btn' + (activeTag === null ? ' active' : '');
+  allT.textContent = 'すべて';
+  allT.onclick = () => { activeTag = null; renderAll(); };
+  tc.appendChild(allT);
+  ALL_TAGS.forEach(tag => {
+    const b = document.createElement('button');
+    b.className = 'tag-btn' + (activeTag === tag ? ' active' : '');
+    b.textContent = tag;
+    b.onclick = () => { activeTag = tag; renderAll(); };
+    tc.appendChild(b);
+  });
+
+  // --- Worry ---
   document.querySelectorAll('.worry-btn').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.worry === activeWorry);
   });
+
+  // --- Toggle button状態 (active-dot / has-active) ---
+  document.getElementById('toggle-worry').classList.toggle('has-active', activeWorry !== null);
+  document.getElementById('toggle-month').classList.toggle('has-active', activeMonth !== null);
+  document.getElementById('toggle-tag').classList.toggle('has-active', activeTag !== null);
 }
 
-// ── Render filter buttons ──────────────────────────────
-function renderFilters() {
-  // Month buttons
-  const monthContainer = document.getElementById('month-filters');
-  monthContainer.innerHTML = '';
-  const allMonthBtn = document.createElement('button');
-  allMonthBtn.className = 'month-btn' + (activeMonth === null ? ' active' : '');
-  allMonthBtn.textContent = 'すべて';
-  allMonthBtn.onclick = () => { activeMonth = null; renderAll(); };
-  monthContainer.appendChild(allMonthBtn);
-  getMonths().forEach(({ key, label }) => {
-    const btn = document.createElement('button');
-    btn.className = 'month-btn' + (activeMonth === key ? ' active' : '');
-    btn.textContent = label;
-    btn.onclick = () => { activeMonth = key; renderAll(); };
-    monthContainer.appendChild(btn);
-  });
-
-  // Tag buttons
-  const tagContainer = document.getElementById('tag-filters');
-  tagContainer.innerHTML = '';
-  const allTagBtn = document.createElement('button');
-  allTagBtn.className = 'tag-btn' + (activeTag === null ? ' active' : '');
-  allTagBtn.textContent = 'すべて';
-  allTagBtn.onclick = () => { activeTag = null; renderAll(); };
-  tagContainer.appendChild(allTagBtn);
-  ALL_TAGS.forEach(tag => {
-    const btn = document.createElement('button');
-    btn.className = 'tag-btn' + (activeTag === tag ? ' active' : '');
-    btn.textContent = tag;
-    btn.onclick = () => { activeTag = tag; renderAll(); };
-    tagContainer.appendChild(btn);
-  });
-
-  // Worry buttons (static HTML, just sync active state)
-  renderWorryButtons();
-}
-
-// ── Filter & sort data ─────────────────────────────────
+// ── Filter & sort ──────────────────────────────────────
 function getFiltered() {
   const kwLower = searchKw.toLowerCase();
   let result = QA_DATA.filter(d => {
     const monthKey = `${d.year}_${String(d.month).padStart(2,'0')}`;
     const monthOk  = activeMonth === null || monthKey === activeMonth;
-    const tagOk    = activeTag === null || d.tag === activeTag;
+    const tagOk    = activeTag   === null || d.tag === activeTag;
     const worryOk  = activeWorry === null || (d.worries && d.worries.includes(activeWorry));
     const kwOk     = !kwLower || [d.question, d.answer, d.name, d.tag, d.monthLabel]
                        .some(s => s.toLowerCase().includes(kwLower));
@@ -647,18 +545,13 @@ function ytUrl(videoId, seconds) {
 
 // ── Escape HTML ────────────────────────────────────────
 function escHtml(str) {
-  return str
-    .replace(/&/g,'&amp;')
-    .replace(/</g,'&lt;')
-    .replace(/>/g,'&gt;')
-    .replace(/"/g,'&quot;');
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-// ── Highlight keyword ──────────────────────────────────
+// ── Keyword highlight ──────────────────────────────────
 function highlight(escapedStr) {
   if (!searchKw) return escapedStr;
-  const escaped = escHtml(searchKw);
-  const re = new RegExp(escaped.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'gi');
+  const re = new RegExp(escHtml(searchKw).replace(/[.*+?^${}()|[\]\\]/g,'\\$&'), 'gi');
   return escapedStr.replace(re, m => `<mark>${m}</mark>`);
 }
 
@@ -667,10 +560,7 @@ function renderCards(data) {
   const list  = document.getElementById('qa-list');
   const empty = document.getElementById('empty-state');
   list.innerHTML = '';
-  if (data.length === 0) {
-    empty.style.display = 'block';
-    return;
-  }
+  if (data.length === 0) { empty.style.display = 'block'; return; }
   empty.style.display = 'none';
 
   const groups = new Map();
@@ -679,14 +569,14 @@ function renderCards(data) {
     groups.get(d.monthLabel).push(d);
   });
 
-  const showGroupHeaders = activeMonth === null && activeWorry === null && !searchKw && getMonths().length > 1;
+  const showHeaders = activeMonth === null && activeWorry === null && !searchKw && getMonths().length > 1;
 
   groups.forEach((items, monthLabel) => {
-    if (showGroupHeaders) {
-      const header = document.createElement('div');
-      header.className = 'month-group-header';
-      header.textContent = monthLabel;
-      list.appendChild(header);
+    if (showHeaders) {
+      const h = document.createElement('div');
+      h.className = 'month-group-header';
+      h.textContent = monthLabel;
+      list.appendChild(h);
     }
     items.forEach(d => {
       const card = document.createElement('div');
@@ -711,19 +601,18 @@ function renderCards(data) {
         </div>
         <div class="card-footer">
           <a class="yt-link" href="${ytUrl(d.videoId, d.seconds)}" target="_blank" rel="noopener">
-            <svg class="yt-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <svg class="yt-icon" viewBox="0 0 24 24" fill="currentColor">
               <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1C4.5 20.4 12 20.4 12 20.4s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/>
             </svg>
             ${escHtml(d.timestamp)} から見る
           </a>
-        </div>
-      `;
+        </div>`;
       list.appendChild(card);
     });
   });
 }
 
-// ── Stats & clear button ───────────────────────────────
+// ── Stats ──────────────────────────────────────────────
 function renderStats(data) {
   const el    = document.getElementById('stats-count');
   const total = QA_DATA.length;
@@ -736,22 +625,19 @@ function renderStats(data) {
     if (searchKw)    hint += `「${escHtml(searchKw)}」`;
     el.innerHTML = `<strong>${data.length}</strong> 件表示中${hint}（全 ${total} 件）`;
   }
-  const clearBtn = document.getElementById('clear-btn');
-  clearBtn.classList.toggle('visible', hasFilter);
+  document.getElementById('clear-btn').classList.toggle('visible', hasFilter);
 }
 
-// ── Clear all filters ──────────────────────────────────
+// ── Clear all ──────────────────────────────────────────
 function clearFilters() {
-  activeTag   = null;
-  activeMonth = null;
-  activeWorry = null;
-  searchKw    = '';
+  activeTag = activeMonth = activeWorry = null;
+  searchKw  = '';
   document.getElementById('search-input').value = '';
   document.getElementById('search-clear').classList.remove('visible');
   renderAll();
 }
 
-// ── Full render cycle ──────────────────────────────────
+// ── Full render ────────────────────────────────────────
 function renderAll() {
   const data = getFiltered();
   renderFilters();
@@ -759,7 +645,6 @@ function renderAll() {
   renderStats(data);
 }
 
-// ── Init ───────────────────────────────────────────────
 renderAll();
 </script>
 </body>
